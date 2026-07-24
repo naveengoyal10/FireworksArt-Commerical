@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container painting-detail-page py-4">
+  <style>
+    .painting-main-image img {
+      transition: transform 0.3s ease;
+    }
+    .painting-main-image img:hover {
+      transform: scale(1.04);
+    }
+    .thumbnail-button {
+      border: 0;
+      background: transparent;
+      padding: 0;
+    }
+    .thumbnail-button img {
+      border: 1px solid #dee2e6;
+      border-radius: 0.35rem;
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+    }
+    .thumbnail-button.active img {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.15);
+    }
+  </style>
+  <div class="row gx-4 gy-4">
+    <div class="col-lg-6">
+      <div class="painting-gallery">
+        <div class="painting-main-image position-relative overflow-hidden">
+          {% if painting.featured_image %}
+            <img id="painting-main" src="{{ painting.featured_image.url }}" alt="{{ painting.title }}" class="img-fluid painting-zoom-target">
+          {% else %}
+            <img id="painting-main" src="/static/sample_images/painting.svg" alt="{{ painting.title }}" class="img-fluid painting-zoom-target">
+          {% endif %}
+        </div>
+        <div class="painting-thumbnails d-flex flex-wrap gap-2 mt-3">
+          {% if painting.featured_image %}
+            <button class="thumbnail-button active" type="button" data-image="{{ painting.featured_image.url }}">
+              <img src="{{ painting.featured_image.url }}" alt="{{ painting.title }}" class="img-fluid">
+            </button>
+          {% endif %}
+          {% for image in painting.gallery_images.all %}
+            <button class="thumbnail-button" type="button" data-image="{{ image.image.url }}">
+              <img src="{{ image.image.url }}" alt="{{ image.caption|default:painting.title }}" class="img-fluid">
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="painting-summary">
+        <h1 class="mb-2">{{ painting.title }}</h1>
+        <p class="text-muted mb-3">by <strong>{{ painting.artist_name|default:'Unknown Artist' }}</strong></p>
+
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="painting-price">
+            {% if painting.discount_price %}
+              <span class="fs-3 fw-bold text-danger">₹{{ painting.discount_price }}</span>
+              <span class="text-muted text-decoration-line-through ms-2">₹{{ painting.price }}</span>
+            {% else %}
+              <span class="fs-3 fw-bold">₹{{ painting.price }}</span>
+            {% endif %}
+          </div>
+          <div class="painting-stock">
+            {% if painting.stock > 0 %}
+              <span class="badge bg-success">In stock ({{ painting.stock }})</span>
+            {% else %}
+              <span class="badge bg-danger">Out of stock</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="painting-rating mb-3">
+          {% if painting.average_rating %}
+            <span class="fs-5">{{ painting.average_rating|floatformat:1 }}/5</span>
+            <span class="text-warning">{% for i in '12345'|slice:':5' %}{% if forloop.counter <= rounded_rating %}★{% else %}☆{% endif %}{% endfor %}</span>
+            <span class="text-muted">({{ active_review_count }} reviews)</span>
+          {% else %}
+            <span class="text-muted">No customer reviews yet</span>
+          {% endif %}
+        </div>
+
+        <p class="mb-4">{{ painting.description }}</p>
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <a href="{% url 'cart:add_to_cart' painting.id %}" class="btn btn-primary btn-lg">Add to Cart</a>
+          <a href="{% url 'cart:add_to_cart' painting.id %}?next=/cart/" class="btn btn-outline-primary btn-lg">Buy Now</a>
+          <a href="{% url 'wishlist:wishlist_add' painting.id %}" class="btn btn-outline-secondary btn-lg">Add to Wishlist</a>
+        </div>
+
+        <div class="painting-specs row row-cols-2 g-3">
+          <div class="col"><strong>Artist</strong><br>{{ painting.artist_name|default:'Unknown' }}</div>
+        </div>
+
+        <div class="share-buttons mt-4">
+          <strong>Share</strong>
+          <div class="d-flex gap-2 flex-wrap mt-2">
+            <a class="btn btn-outline-secondary btn-sm" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">Facebook</a>
+            <a class="btn btn-outline-secondary btn-sm" href="mailto:?subject={{ painting.title|urlencode }}&body={{ request.build_absolute_uri|urlencode }}">Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row gy-4 mt-5">
+    <div class="col-lg-8">
+      <div class="card p-4 mb-4">
+        <h3>Description</h3>
+        <p>{{ painting.description }}</p>
+        {% if painting.story %}
+          <h4>Story</h4>
+          <p>{{ painting.story }}</p>
+        {% endif %}
+      </div>
+      <div class="card p-4 mb-4">
+        <h3>Specifications</h3>
+        <table class="table table-borderless mb-0">
+          <tbody>
+            <tr><th>Price</th><td>₹{{ painting.discount_price|default:painting.price }}</td></tr>
+            <tr><th>Stock status</th><td>{% if painting.stock > 0 %}In stock{% else %}Out of stock{% endif %}</td></tr>
+            <tr><th>Artist</th><td>{{ painting.artist_name|default:'Unknown' }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const thumbnails = document.querySelectorAll('.thumbnail-button');
+    const mainImage = document.getElementById('painting-main');
+    thumbnails.forEach(function(button) {
+      button.addEventListener('click', function() {
+        thumbnails.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        mainImage.src = button.dataset.image;
+      });
+    });
+  });
+</script>
+{% endblock %}

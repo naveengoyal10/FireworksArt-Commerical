@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard | {{ site_name }}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="mb-1">Admin Dashboard</h1>
+      <p class="text-muted">Sales analytics, revenue, orders, inventory, and top selling paintings.</p>
+    </div>
+  </div>
+
+  <div class="row gy-4">
+    <div class="col-md-3">
+      <div class="card p-4 h-100">
+        <h5>Total Revenue</h5>
+        <div class="fs-3 fw-bold">${{ total_revenue|floatformat:2 }}</div>
+        <small class="text-muted">Completed sales</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-4 h-100">
+        <h5>Total Orders</h5>
+        <div class="fs-3 fw-bold">{{ total_orders }}</div>
+        <small class="text-muted">All orders</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-4 h-100">
+        <h5>Customers</h5>
+        <div class="fs-3 fw-bold">{{ total_customers }}</div>
+        <small class="text-muted">Registered users</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-4 h-100">
+        <h5>Inventory</h5>
+        <div class="fs-3 fw-bold">{{ inventory_count }}</div>
+        <small class="text-muted">Published paintings</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row gy-4 mt-4">
+    <div class="col-lg-8">
+      <div class="card p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h5 class="mb-0">Sales Last 7 Days</h5>
+            <small class="text-muted">Revenue over the past week</small>
+          </div>
+        </div>
+        <canvas id="salesChart" height="150"></canvas>
+      </div>
+      <div class="card p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h5 class="mb-0">Order Status Breakdown</h5>
+            <small class="text-muted">Current order workflow</small>
+          </div>
+        </div>
+        <canvas id="statusChart" height="150"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card p-4 mb-4">
+        <h5 class="mb-3">Revenue Snapshot</h5>
+        <div class="mb-3">
+          <div class="text-muted">Last 30 days</div>
+          <div class="fs-3 fw-bold">${{ revenue_30_days|floatformat:2 }}</div>
+        </div>
+        <div>
+          <div class="text-muted">Orders in 30 days</div>
+          <div class="fs-3 fw-bold">{{ orders_30_days }}</div>
+        </div>
+      </div>
+      <div class="card p-4 mb-4">
+        <h5 class="mb-3">Low Stock Alerts</h5>
+        {% if low_stock_paintings %}
+          <ul class="list-unstyled mb-0">
+            {% for painting in low_stock_paintings %}
+              <li class="border-bottom py-2">
+                <strong>{{ painting.title }}</strong><br>
+                <small class="text-muted">Stock: {{ painting.stock }}</small>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted mb-0">No low stock items.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row gy-4">
+    <div class="col-lg-6">
+      <div class="card p-4 mb-4">
+        <h5>Recent Orders</h5>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in recent_orders %}
+                <tr>
+                  <td>#{{ order.id }}</td>
+                  <td>{{ order.created|date:'M d' }}</td>
+                  <td>{{ order.get_status_display }}</td>
+                  <td>${{ order.total|floatformat:2 }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card p-4 mb-4">
+        <h5>Top Selling Paintings</h5>
+        <ul class="list-unstyled mb-0">
+          {% for item in top_selling %}
+            <li class="border-bottom py-2">
+              <strong>{{ item.painting__title }}</strong><br>
+              <small class="text-muted">Sold: {{ item.quantity_sold }} • Revenue: ${{ item.revenue|floatformat:2 }}</small>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const salesCtx = document.getElementById('salesChart');
+  if (salesCtx) {
+    new Chart(salesCtx, {
+      type: 'line',
+      data: {
+        labels: {{ sales_labels|safe }},
+        datasets: [{
+          label: 'Revenue',
+          data: {{ sales_data|safe }},
+          borderColor: '#0d6efd',
+          backgroundColor: 'rgba(13, 110, 253, 0.15)',
+          fill: true,
+          tension: 0.35,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  const statusCtx = document.getElementById('statusChart');
+  if (statusCtx) {
+    new Chart(statusCtx, {
+      type: 'doughnut',
+      data: {
+        labels: {{ order_status_labels|safe }},
+        datasets: [{
+          data: {{ order_status_data|safe }},
+          backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#0dcaf0', '#6610f2', '#dc3545'],
+        }]
+      },
+      options: { responsive: true }
+    });
+  }
+</script>
+{% endblock %}

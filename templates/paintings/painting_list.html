@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="mb-4">Paintings</h1>
+  {% if paintings %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+      {% for painting in paintings %}
+        <div class="col">
+          <div class="card h-100">
+            {% if painting.featured_image %}
+              <img src="{{ painting.featured_image.url }}" class="card-img-top" alt="{{ painting.title }}">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ painting.title }}</h5>
+              <p class="card-text text-muted mb-2">by {{ painting.artist_name|default:'Unknown Artist' }}</p>
+              <p class="card-text mb-3">₹{{ painting.discount_price|default:painting.price }}</p>
+              <a href="{{ painting.get_absolute_url }}" class="btn btn-sm btn-primary mt-auto">View details</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">No paintings are available right now.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="alert alert-danger">
+        <h1 class="display-3 mb-3 text-center">✗</h1>
+        <h2 class="text-center mb-3">Payment Failed</h2>
+        <p class="lead text-center mb-4">Unfortunately, your payment could not be processed.</p>
+
+        {% if error %}
+          <div class="alert alert-warning">
+            <strong>Error:</strong> {{ error }}
+          </div>
+        {% endif %}
+
+        <div class="text-center">
+          <p class="mb-3">Please try again or contact our support team for assistance.</p>
+          
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'cart:cart_view' %}" class="btn btn-primary btn-lg">
+              Return to Cart
+            </a>
+            <a href="{% url 'painting_list' %}" class="btn btn-outline-secondary btn-lg">
+              Continue Shopping
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5 class="mb-0">Need Help?</h5>
+        </div>
+        <div class="card-body">
+          <p>If you continue to experience issues with payment, please contact our support team:</p>
+          <ul>
+            <li><strong>Email:</strong> support@fireworkart.com</li>
+            <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+            <li><strong>Hours:</strong> Monday - Friday, 9 AM - 5 PM EST</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

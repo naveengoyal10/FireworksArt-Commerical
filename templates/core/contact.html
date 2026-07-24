@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row gy-4">
+    <div class="col-lg-7">
+      <div class="card p-4 mb-4">
+        <h1>Contact Us</h1>
+        <p class="text-muted">Have a question about our handmade paintings or need help with your order? Send us a message and our team will respond as soon as possible.</p>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="id_name">Name</label>
+              {{ form.name }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="id_email">Email</label>
+              {{ form.email }}
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="id_subject">Subject</label>
+              {{ form.subject }}
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="id_message">Message</label>
+              {{ form.message }}
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-4">Send Message</button>
+        </form>
+      </div>
+      <div class="card p-4">
+        <h3>Our Location</h3>
+        <div class="ratio ratio-16x9 mb-3">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0199347580084!2d-122.42067968468137!3d37.77851927975848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808cc8f54d0f%3A0x4c9bb740f62ec33f!2sSan%20Francisco%20Museum%20of%20Modern%20Art!5e0!3m2!1sen!2sus!4v1700000000000"
+            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <p class="text-muted">Visit our showroom or send us a message using the contact form.</p>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card p-4 mb-4">
+        <h3>Business Information</h3>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-3">
+            <strong>Location</strong><br>
+            123 Art Lane<br>
+            Creative City, Country
+          </li>
+          <li class="mb-3">
+            <strong>Phone</strong><br>
+            <a href="tel:+1555123456">+1 555 123 456</a>
+          </li>
+          <li class="mb-3">
+            <strong>Email</strong><br>
+            <a href="mailto:support@fireworkart.com">support@fireworkart.com</a>
+          </li>
+          <li>
+            <strong>Working Hours</strong><br>
+            Mon - Fri: 9am - 6pm<br>
+            Sat: 10am - 4pm<br>
+            Sun: Closed
+          </li>
+        </ul>
+      </div>
+      <div class="card p-4">
+        <h3>Connect with Us</h3>
+        <div class="d-flex flex-column gap-2">
+          <a href="https://www.instagram.com/fireworks_of_art/" target="_blank" class="btn btn-outline-secondary text-start">Instagram</a>
+          <a href="https://www.facebook.com/2193211274250582?ref=PROFILE_EDIT_xav_ig_profile_page_web" target="_blank" class="btn btn-outline-secondary text-start">Facebook</a>
+          <a href="https://l.instagram.com/?u=https%3A%2F%2Fwww.youtube.com%2F%40FireworkofArt%3Ffbclid%3DPAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAadRwpnzIWZYYS66wAQSjbL-UVinIvhlSJQAw8zqdv54Ixlnv6eFRc3SJ5hvBw_aem_muoz_JjtQsJ8ORpP3HJE1Q&e=AUAiwtgI2O3b4Yic4SO-HujG1R_2R03tMkFBtigbEu9uItev90bufPZQ405ngftRJ7WtfTOimmWcEmX3D85bPIc-Z3vGh3cQy7GLJ3X7P_ZOF3lr596Q8RRAsd6-kNDhswVSSNE" target="_blank" class="btn btn-outline-secondary text-start">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

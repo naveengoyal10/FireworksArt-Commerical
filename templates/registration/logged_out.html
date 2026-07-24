@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0 p-4 text-center">
+        <div class="mb-3">
+          <span class="badge text-bg-light border px-3 py-2">Account</span>
+        </div>
+        <h1 class="mb-3">Sign Out</h1>
+        <p class="lead mb-4">Are you sure you want to sign out of your Firework Of Art account?</p>
+        <p class="text-muted mb-4">You can always sign back in later to continue browsing, saving favorites, and tracking orders.</p>
+
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <div class="d-flex justify-content-center gap-2 flex-wrap">
+            <a href="/" class="btn btn-outline-secondary">Stay Signed In</a>
+            <button type="submit" class="btn btn-primary">Sign Out</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

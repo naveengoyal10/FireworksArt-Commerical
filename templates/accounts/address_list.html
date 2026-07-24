@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Addresses</h2>
+<p><a class="btn btn-primary" href="{% url 'accounts_address_add' %}">Add Address</a></p>
+<ul class="list-group mt-3">
+  {% for a in addresses %}
+    <li class="list-group-item">
+      <strong>{{ a.label }}</strong> — {{ a.line1 }}, {{ a.city }} {{ a.postal_code }}
+      <div class="float-end">
+        <a class="btn btn-sm btn-secondary" href="{% url 'accounts_address_edit' a.pk %}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'accounts_address_delete' a.pk %}">Delete</a>
+      </div>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No addresses yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

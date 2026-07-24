@@ -1,0 +1,31 @@
+Payment Confirmation
+
+Your payment has been successfully received!
+
+Order Number: #{{ order.id }}
+Amount Paid: ${{ order.total|floatformat:2 }}
+Payment Method: {{ order.get_payment_method_display }}
+Payment Status: Completed
+Date: {{ order.created|date:'F j, Y \a\t g:i A' }}
+
+WHAT HAPPENS NEXT:
+1. Your order is confirmed and will be prepared for shipment
+2. You'll receive tracking information via email once your order ships
+3. Your paintings will be carefully packaged for safe delivery
+4. Standard delivery time is 5-7 business days
+
+SHIPPING ADDRESS:
+{{ order.shipping_address }}
+{{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_postal_code }}
+{{ order.shipping_country }}
+
+Need Help?
+If you have any questions about your order, please contact us at:
+Email: support@fireworkart.com
+Website: www.fireworkart.com
+
+Thank you for your purchase!
+
+---
+© FireworkArt. All rights reserved.
+This is an automated message. Please do not reply directly to this email.

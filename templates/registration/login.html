@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="login-shell">
+  <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="login-card mx-auto">
+      <div class="login-card-header text-center mb-4">
+        <span class="login-badge">FIREWORK OF ART</span>
+        <h2 class="login-title">Sign in to your account</h2>
+        <p class="login-subtitle">Access exclusive artwork, order history, and personalized collections.</p>
+      </div>
+
+      <form method="post" class="login-form" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="mb-4 input-with-icon">
+          <label class="form-label" for="id_username">Username or Email</label>
+          <span class="field-icon"><i class="fas fa-user"></i></span>
+          {{ form.username }}
+          {{ form.username.errors }}
+        </div>
+
+        <div class="mb-4 input-with-icon">
+          <label class="form-label" for="id_password">Password</label>
+          <span class="field-icon"><i class="fas fa-lock"></i></span>
+          {{ form.password }}
+          <span class="password-toggle" id="togglePassword"><i class="fas fa-eye"></i></span>
+          {{ form.password.errors }}
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="form-check mb-0">
+            <input class="form-check-input" type="checkbox" name="remember" id="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+          </div>
+          <a class="forgot-link" href="{% url 'password_reset' %}">Forgot password?</a>
+        </div>
+
+        <button class="btn btn-login w-100 mb-3" type="submit" id="loginSubmit">
+          <span class="spinner-border spinner-border-sm d-none me-2" id="loginSpinner" role="status" aria-hidden="true"></span>
+          Sign In
+        </button>
+
+        <div class="divider-text mb-3">or continue with</div>
+        {% if not google_social_login_enabled and not facebook_social_login_enabled and not apple_social_login_enabled %}
+          <div class="alert alert-warning small mb-3">Social sign-in is not configured yet. Add Google/Facebook/Apple credentials in your environment to enable these buttons.</div>
+        {% endif %}
+        <div class="row g-3 mb-4">
+          <div class="col-sm-4">
+            {% if google_social_login_enabled %}
+              <a href="{% url 'google_login' %}" class="btn btn-outline-google w-100">
+                <i class="fab fa-google"></i>
+                <span>Google</span>
+              </a>
+            {% else %}
+              <button type="button" class="btn btn-outline-google w-100" disabled>
+                <i class="fab fa-google"></i>
+                <span>Google</span>
+              </button>
+            {% endif %}
+          </div>
+          <div class="col-sm-4">
+            {% if facebook_social_login_enabled %}
+              <a href="{% url 'facebook_login' %}" class="btn btn-outline-facebook w-100">
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook</span>
+              </a>
+            {% else %}
+              <button type="button" class="btn btn-outline-facebook w-100" disabled>
+                <i class="fab fa-facebook-f"></i>
+                <span>Facebook</span>
+              </button>
+            {% endif %}
+          </div>
+          <div class="col-sm-4">
+            {% if apple_social_login_enabled %}
+              <a href="{% url 'apple_login' %}" class="btn btn-outline-apple w-100">
+                <i class="fab fa-apple"></i>
+                <span>Apple</span>
+              </a>
+            {% else %}
+              <button type="button" class="btn btn-outline-apple w-100" disabled>
+                <i class="fab fa-apple"></i>
+                <span>Apple</span>
+              </button>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="text-center">
+          <span class="text-muted">New to FIREWORK OF ART?</span>
+          <a class="btn btn-outline-secondary btn-sm ms-2" href="/register/">Create an Account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('id_password');
+    const loginForm = document.querySelector('.login-form');
+    const spinner = document.getElementById('loginSpinner');
+    const submitButton = document.getElementById('loginSubmit');
+
+    if (togglePassword && passwordInput) {
+      togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+      });
+    }
+
+    if (loginForm) {
+      loginForm.addEventListener('submit', function() {
+        spinner.classList.remove('d-none');
+        submitButton.classList.add('btn-loading');
+      });
+    }
+  });
+</script>
+{% endblock %}

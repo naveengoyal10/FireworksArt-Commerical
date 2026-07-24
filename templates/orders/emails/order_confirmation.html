@@ -1,0 +1,103 @@
+{% autoescape off %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #f8f9fa; padding: 20px; border-bottom: 1px solid #dee2e6; }
+        .content { padding: 20px 0; }
+        .item { border-bottom: 1px solid #dee2e6; padding: 10px 0; }
+        .footer { background-color: #f8f9fa; padding: 20px; border-top: 1px solid #dee2e6; margin-top: 20px; }
+        .price { float: right; }
+        table { width: 100%; }
+        th { text-align: left; padding: 10px 0; border-bottom: 2px solid #0d6efd; }
+        td { padding: 10px 0; border-bottom: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 style="margin: 0; color: #0d6efd;">FireworkArt</h1>
+            <p style="margin: 5px 0 0 0; color: #666;">Order Confirmation</p>
+        </div>
+
+        <div class="content">
+            <p>Thank you for your order!</p>
+
+            <h2>Order #{{ order.id }}</h2>
+            <p>Order Date: {{ order.created|date:'F j, Y \a\t g:i A' }}</p>
+
+            <h3>Order Items</h3>
+            <table>
+                <tr>
+                    <th>Painting</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.painting.title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.price|floatformat:2 }}</td>
+                    <td>₹{{ item.subtotal|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <h3>Order Summary</h3>
+            <table>
+                <tr>
+                    <td>Subtotal:</td>
+                    <td class="price" style="text-align: right;">₹{{ order.subtotal|floatformat:2 }}</td>
+                </tr>
+                {% if order.discount > 0 %}
+                <tr>
+                    <td style="color: green;">Discount:</td>
+                    <td class="price" style="text-align: right; color: green;">-₹{{ order.discount|floatformat:2 }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td>Tax (10%):</td>
+                    <td class="price" style="text-align: right;">₹{{ order.tax|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                    <td>Shipping:</td>
+                    <td class="price" style="text-align: right;">₹{{ order.shipping_cost|floatformat:2 }}</td>
+                </tr>
+                <tr style="border-bottom: 2px solid #0d6efd;">
+                    <td><strong>Grand Total:</strong></td>
+                    <td class="price" style="text-align: right; font-size: 18px; color: #0d6efd;"><strong>₹{{ order.total|floatformat:2 }}</strong></td>
+                </tr>
+            </table>
+
+            <h3>Shipping Address</h3>
+            <p>
+                {{ order.full_name }}<br>
+                {{ order.shipping_address }}<br>
+                {{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_postal_code }}<br>
+                {{ order.shipping_country }}
+            </p>
+
+            <h3>Payment Method</h3>
+            <p>{{ order.get_payment_method_display }}</p>
+
+            <h3>What's Next?</h3>
+            <ul>
+                <li>Your order will be carefully packed and prepared for shipment</li>
+                <li>You'll receive an email with tracking information once your order ships</li>
+                <li>For any questions, please contact us at support@fireworkart.com</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p style="margin: 0;">© FireworkArt. All rights reserved.</p>
+            <p style="margin: 10px 0 0 0; color: #666; font-size: 12px;">
+                This email was sent to {{ order.email }}. Please do not reply directly to this email.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+{% endautoescape %}

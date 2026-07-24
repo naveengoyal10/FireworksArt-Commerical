@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Cart</h2>
+{% if items %}
+  <table>
+    <tr><th>Painting</th><th>Qty</th><th>Subtotal</th><th></th></tr>
+    {% for i in items %}
+      <tr>
+        <td><a href="{{ i.product.get_absolute_url }}">{{ i.product.name }}</a></td>
+        <td>{{ i.quantity }}</td>
+        <td>${{ i.subtotal }}</td>
+        <td><a href="{% url 'cart:cart_remove' i.product.id %}">Remove</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+  <p>Total: ${{ total }}</p>
+  <p><a href="{% url 'orders:checkout' %}">Proceed to checkout</a></p>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

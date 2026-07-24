@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body">
+          <!-- Invoice Header -->
+          <div class="row mb-4">
+            <div class="col-6">
+              <h1 style="margin: 0; font-size: 28px; font-weight: bold;">INVOICE</h1>
+              <p style="color: #666; margin: 5px 0 0 0;">FireworkArt</p>
+            </div>
+            <div class="col-6 text-end">
+              <h2 style="margin: 0; font-size: 24px; color: #0d6efd;">{{ order.id }}</h2>
+              <p style="color: #666; margin: 5px 0 0 0;">Order Number</p>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Order Details -->
+          <div class="row mb-4">
+            <div class="col-6">
+              <p><strong>Order Date:</strong><br>{{ order.created|date:'F j, Y' }}</p>
+              <p><strong>Order Status:</strong><br><span class="badge bg-info">{{ order.get_status_display }}</span></p>
+            </div>
+            <div class="col-6 text-end">
+              <p><strong>Payment Status:</strong><br><span class="badge bg-success">{{ order.get_payment_status_display }}</span></p>
+              <p><strong>Payment Method:</strong><br>{{ order.get_payment_method_display }}</p>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Addresses -->
+          <div class="row mb-4">
+            <div class="col-6">
+              <h5>Bill To:</h5>
+              <p style="margin: 0;">{{ order.full_name }}</p>
+              <p style="margin: 0; color: #666;">{{ order.billing_address }}</p>
+              <p style="margin: 0; color: #666;">{{ order.billing_city }}, {{ order.billing_state }} {{ order.billing_postal_code }}</p>
+              <p style="margin: 0; color: #666;">{{ order.billing_country }}</p>
+              <p style="margin: 5px 0 0 0; color: #666;">{{ order.email }}</p>
+            </div>
+            <div class="col-6">
+              <h5>Ship To:</h5>
+              <p style="margin: 0;">{{ order.full_name }}</p>
+              <p style="margin: 0; color: #666;">{{ order.shipping_address }}</p>
+              <p style="margin: 0; color: #666;">{{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_postal_code }}</p>
+              <p style="margin: 0; color: #666;">{{ order.shipping_country }}</p>
+              <p style="margin: 5px 0 0 0; color: #666;">{{ order.phone }}</p>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Items Table -->
+          <div class="table-responsive mb-4">
+            <table class="table">
+              <thead class="table-light">
+                <tr style="border-bottom: 2px solid #0d6efd;">
+                  <th>Item</th>
+                  <th class="text-end">Quantity</th>
+                  <th class="text-end">Unit Price</th>
+                  <th class="text-end">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in order.items.all %}
+                  <tr>
+                    <td>{{ item.painting.title }}</td>
+                    <td class="text-end">{{ item.quantity }}</td>
+                    <td class="text-end">₹{{ item.price|floatformat:2 }}</td>
+                    <td class="text-end"><strong>₹{{ item.subtotal|floatformat:2 }}</strong></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <hr>
+
+          <!-- Summary -->
+          <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+              <table class="table" style="border: none;">
+                <tr>
+                  <td><strong>Subtotal:</strong></td>
+                  <td class="text-end">₹{{ order.subtotal|floatformat:2 }}</td>
+                </tr>
+                {% if order.discount > 0 %}
+                  <tr style="color: green;">
+                    <td><strong>Discount:</strong></td>
+                    <td class="text-end">-₹{{ order.discount|floatformat:2 }}</td>
+                  </tr>
+                {% endif %}
+                <tr>
+                  <td><strong>Tax (10%):</strong></td>
+                  <td class="text-end">₹{{ order.tax|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                  <td><strong>Shipping:</strong></td>
+                  <td class="text-end">₹{{ order.shipping_cost|floatformat:2 }}</td>
+                </tr>
+                <tr style="border-top: 2px solid #0d6efd;">
+                  <td><h5 style="margin: 0;"><strong>Grand Total:</strong></h5></td>
+                  <td class="text-end"><h5 style="margin: 0; color: #0d6efd;"><strong>₹{{ order.total|floatformat:2 }}</strong></h5></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Footer -->
+          <div class="text-center mt-4" style="color: #666; font-size: 12px;">
+            <p style="margin: 0;">© FireworkArt - Handmade Paintings E-Commerce</p>
+            <p style="margin: 5px 0 0 0;">www.fireworkart.com | support@fireworkart.com</p>
+            <p style="margin: 10px 0 0 0;">Thank you for your business!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Print Button -->
+      <div class="mt-4 text-center">
+        <button class="btn btn-primary" onclick="window.print();">
+          <i class="fas fa-print"></i> Print Invoice
+        </button>
+        <a href="{% url 'orders:order_confirmation' order.id %}" class="btn btn-outline-secondary">
+          Back to Order
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

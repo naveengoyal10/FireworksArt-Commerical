@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Delete Address</h2>
+<p>Are you sure you want to delete address: <strong>{{ address }}</strong>?</p>
+<form method="post">{% csrf_token %}
+  <button class="btn btn-danger" type="submit">Delete</button>
+  <a class="btn btn-secondary" href="{% url 'accounts_address_list' %}">Cancel</a>
+</form>
+{% endblock %}

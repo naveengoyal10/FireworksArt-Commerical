@@ -1,0 +1,40 @@
+Order Confirmation - FireworkArt
+
+Thank you for your order!
+
+Order Number: #{{ order.id }}
+Order Date: {{ order.created|date:'F j, Y \a\t g:i A' }}
+Total Amount: ${{ order.total|floatformat:2 }}
+
+ORDER ITEMS:
+{% for item in order.items.all %}
+- {{ item.painting.title }} (x{{ item.quantity }}) - ${{ item.subtotal|floatformat:2 }}
+{% endfor %}
+
+BILLING ADDRESS:
+{{ order.full_name }}
+{{ order.billing_address }}
+{{ order.billing_city }}, {{ order.billing_state }} {{ order.billing_postal_code }}
+{{ order.billing_country }}
+
+SHIPPING ADDRESS:
+{{ order.full_name }}
+{{ order.shipping_address }}
+{{ order.shipping_city }}, {{ order.shipping_state }} {{ order.shipping_postal_code }}
+{{ order.shipping_country }}
+
+PAYMENT METHOD: {{ order.get_payment_method_display }}
+
+Next Steps:
+- Your order will be carefully packed and prepared for shipment
+- You'll receive an email with tracking information once your order ships
+- For questions about your order, please reply to this email
+
+Contact Us:
+Email: support@fireworkart.com
+Website: www.fireworkart.com
+
+Thank you for choosing FireworkArt!
+
+---
+This is an automated message. Please do not reply directly to this email.

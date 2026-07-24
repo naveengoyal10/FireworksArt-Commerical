@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon for Handmade Paintings
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/your/project
+Environment="PATH=/path/to/venv/bin"
+ExecStart=/path/to/venv/bin/gunicorn --workers 3 --bind unix:/path/to/your/project/gunicorn.sock handmade_shop.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

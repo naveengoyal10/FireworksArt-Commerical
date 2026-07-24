@@ -1,0 +1,185 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+import dj_database_url
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# load environment variables from .env in project root
+load_dotenv(BASE_DIR / '.env')
+
+SECRET_KEY = os.getenv('SECRET_KEY', 'CHANGE_ME_TO_A_SECURE_VALUE')
+
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'shop',
+    # Project apps
+    'core',
+    'accounts',
+    'paintings',
+    'cart',
+    'orders',
+    'payments',
+    'dashboard',
+    'reviews',
+    'wishlist',
+    'blog',
+    # Authentication / social login
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.apple',
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ROOT_URLCONF = 'handmade_shop.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'core.context_processors.seo_defaults',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'handmade_shop.wsgi.application'
+
+DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES = {'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+AUTH_PASSWORD_VALIDATORS = []
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_TZ = True
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Third party service keys (set in .env)
+RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET')
+STRIPE_API_KEY = os.getenv('STRIPE_API_KEY', '')
+
+# Optional integrations
+MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
+MAILCHIMP_LIST_ID = os.getenv('MAILCHIMP_LIST_ID')
+INSTAGRAM_ACCESS_TOKEN = os.getenv('INSTAGRAM_ACCESS_TOKEN')
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SEO defaults
+SITE_NAME = os.getenv('SITE_NAME', 'Handmade Paintings Shop')
+SITE_URL = os.getenv('SITE_URL', 'http://localhost:8000')
+DEFAULT_META_TITLE = os.getenv('DEFAULT_META_TITLE', 'Handmade Paintings Shop - Original Handmade Artwork')
+DEFAULT_META_DESCRIPTION = os.getenv('DEFAULT_META_DESCRIPTION', 'Discover original handmade paintings crafted by experienced artists. Shop unique artwork, explore custom art collections, and get inspired by distinctive designs for your home or office.')
+DEFAULT_META_IMAGE = os.getenv('DEFAULT_META_IMAGE', f'{SITE_URL}/static/sample_images/logo.jpeg')
+TWITTER_CREATOR = os.getenv('TWITTER_CREATOR', '@fireworkart')
+
+# Email backend for development - prints emails to console
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+
+SOCIALACCOUNT_PROVIDERS = {}
+
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+FACEBOOK_APP_ID = os.getenv('FACEBOOK_APP_ID')
+FACEBOOK_APP_SECRET = os.getenv('FACEBOOK_APP_SECRET')
+APPLE_CLIENT_ID = os.getenv('APPLE_CLIENT_ID')
+APPLE_SECRET = os.getenv('APPLE_SECRET')
+APPLE_KEY_ID = os.getenv('APPLE_KEY_ID')
+APPLE_TEAM_ID = os.getenv('APPLE_TEAM_ID')
+
+if GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET:
+    SOCIALACCOUNT_PROVIDERS['google'] = {
+        'APP': {
+            'client_id': GOOGLE_CLIENT_ID,
+            'secret': GOOGLE_CLIENT_SECRET,
+            'key': '',
+        }
+    }
+
+if FACEBOOK_APP_ID and FACEBOOK_APP_SECRET:
+    SOCIALACCOUNT_PROVIDERS['facebook'] = {
+        'APP': {
+            'client_id': FACEBOOK_APP_ID,
+            'secret': FACEBOOK_APP_SECRET,
+            'key': '',
+        }
+    }
+
+if APPLE_CLIENT_ID and APPLE_SECRET and APPLE_KEY_ID and APPLE_TEAM_ID:
+    SOCIALACCOUNT_PROVIDERS['apple'] = {
+        'APP': {
+            'client_id': APPLE_CLIENT_ID,
+            'secret': APPLE_SECRET,
+            'key': APPLE_KEY_ID,
+            'team': APPLE_TEAM_ID,
+        }
+    }

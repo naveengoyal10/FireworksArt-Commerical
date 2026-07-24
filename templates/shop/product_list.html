@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="shop-storefront">
+  <div class="shop-hero card border-0 shadow-sm mb-4">
+    <div class="card-body p-4 p-lg-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="hero-chip">Handpicked Originals</span>
+          <h1 class="shop-hero-title mt-3 mb-2">Shop handmade paintings for every wall</h1>
+          <p class="shop-hero-text mb-0">Discover curated original artwork, compare sizes and styles, and add your favorites to cart in seconds.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="#catalog" class="btn btn-cta btn-lg">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-toolbar mb-4">
+    <div class="row g-3 align-items-end">
+      <div class="col-lg-4">
+        <label class="form-label" for="search">Search</label>
+        <input type="text" class="form-control" id="search" value="{{ query }}" placeholder="Search paintings, artist, or category">
+      </div>
+      <div class="col-lg-8">
+        <form method="get" class="row g-2 align-items-end" id="catalog">
+          <input type="hidden" name="layout" value="{{ layout }}">
+          <div class="col-md-2">
+            <label class="form-label" for="category">Category</label>
+            <select class="form-select" id="category" name="category">
+              <option value="">All</option>
+              {% for category in category_options %}
+                <option value="{{ category.id }}" {% if category.id|stringformat:'s' == selected_category %}selected{% endif %}>{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="medium">Medium</label>
+            <select class="form-select" id="medium" name="medium">
+              <option value="">All</option>
+              {% for m in medium_options %}
+                <option value="{{ m }}" {% if m == selected_medium %}selected{% endif %}>{{ m }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="size">Size</label>
+            <select class="form-select" id="size" name="size">
+              <option value="">All</option>
+              {% for s in size_options %}
+                <option value="{{ s }}" {% if s == selected_size %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="availability">Availability</label>
+            <select class="form-select" id="availability" name="availability">
+              <option value="">Any</option>
+              <option value="available" {% if selected_availability == 'available' %}selected{% endif %}>Available</option>
+              <option value="unavailable" {% if selected_availability == 'unavailable' %}selected{% endif %}>Unavailable</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="sort">Sort by</label>
+            <select class="form-select" id="sort" name="sort">
+              <option value="latest" {% if selected_sort == 'latest' %}selected{% endif %}>Latest</option>
+              <option value="price_low" {% if selected_sort == 'price_low' %}selected{% endif %}>Price: Low to High</option>
+              <option value="price_high" {% if selected_sort == 'price_high' %}selected{% endif %}>Price: High to Low</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="price_min">Price min</label>
+            <input type="text" class="form-control" id="price_min" name="price_min" value="{{ price_min }}" placeholder="0">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label" for="price_max">Price max</label>
+            <input type="text" class="form-control" id="price_max" name="price_max" value="{{ price_max }}" placeholder="999">
+          </div>
+          <div class="col-12 d-flex gap-2 pt-2">
+            <button type="submit" class="btn btn-primary">Apply filters</button>
+            <a href="?layout={{ layout }}" class="btn btn-outline-secondary">Clear filters</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+    <div class="text-muted">{{ paginator.count }} painting{{ paginator.count|pluralize }} found</div>
+    <div class="btn-group" role="group" aria-label="Layout toggle">
+      <a href="?q={{ query|urlencode }}&layout=grid&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}" class="btn btn-sm btn-outline-primary {% if layout == 'grid' %}active{% endif %}">Grid</a>
+      <a href="?q={{ query|urlencode }}&layout=list&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}" class="btn btn-sm btn-outline-primary {% if layout == 'list' %}active{% endif %}">List</a>
+    </div>
+  </div>
+
+  {% if products %}
+    <div class="product-list row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 {% if layout == 'list' %}list-view{% else %}grid-view{% endif %}">
+      {% for p in products %}
+        <div class="col">
+          <article class="shop-product-card card h-100 border-0 shadow-sm">
+            {% if p.featured_image %}
+              <img src="{{ p.featured_image.url }}" class="card-img-top" alt="{{ p.title }}">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start gap-2">
+                <h3 class="card-title h5 mb-1"><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h3>
+                {% if p.stock > 0 %}
+                  <span class="badge text-bg-success">In stock</span>
+                {% else %}
+                  <span class="badge text-bg-secondary">Sold out</span>
+                {% endif %}
+              </div>
+              <p class="text-muted small mb-2">by {{ p.artist_name|default:'Unknown Artist' }}</p>
+              <p class="text-muted mb-3">{{ p.medium }} · {{ p.size }}</p>
+              <p class="card-text mb-3">{{ p.description|truncatechars:110 }}</p>
+              <div class="mt-auto d-flex justify-content-between align-items-center gap-2">
+                <div class="fw-bold text-dark">₹{{ p.discount_price|default:p.price }}</div>
+                <a href="{% url 'cart:add_to_cart' p.id %}?next={{ request.path }}" class="btn btn-sm btn-primary">Add to cart</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      {% endfor %}
+    </div>
+
+    <nav aria-label="Shop pagination" class="mt-4">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&layout={{ layout }}&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">Previous</span></li>
+        {% endif %}
+
+        {% for num in paginator.page_range %}
+          {% if num == page_obj.number %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&layout={{ layout }}&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&layout={{ layout }}&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ page_obj.next_page_number }}">Next</a></li>
+        {% else %}
+          <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% else %}
+    <div class="alert alert-warning">No paintings found matching your search.</div>
+  {% endif %}
+</div>
+{% endblock %}

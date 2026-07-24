@@ -1,0 +1,27 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+  <div class="app-dashboard">
+    <div class="module">
+      <h1>{% trans "Admin Dashboard" %}</h1>
+      <p>{% trans "Use the analytics dashboard to review sales, orders, inventory, and customer metrics." %}</p>
+      <p><a class="button" href="/dashboard/">Open Analytics Dashboard</a></p>
+    </div>
+    <div class="module">
+      <h2>{% trans "Admin Modules" %}</h2>
+      <div class="app-list">
+        {% for app in app_list %}
+          <div class="app-card">
+            <h3>{{ app.name }}</h3>
+            <ul>
+              {% for model in app.models %}
+                <li><a href="{{ model.admin_url }}">{{ model.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

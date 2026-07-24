@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="home-hero mb-4">
+  {% if slides %}
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="hover">
+      <div class="carousel-indicators">
+        {% for s in slides %}
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+      </div>
+      <div class="carousel-inner">
+        {% for s in slides %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            {% if s.image %}
+              <img src="{{ s.image.url }}" class="d-block w-100" alt="{{ s.title }}">
+            {% else %}
+              <img src="/static/sample_images/hero1Krishna.jpeg" class="d-block w-100" alt="{{ s.title }}">
+            {% endif %}
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{{ s.title }}</h5>
+              <p>{{ s.subtitle }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  {% else %}
+    <div class="text-center">
+      <h1>Welcome to Handmade Paintings</h1>
+      <p class="lead">Original, handcrafted paintings for your home and office.</p>
+      <p><a class="btn btn-primary" href="/shop/">Browse Paintings</a></p>
+    </div>
+  {% endif %}
+</div>
+
+{% if featured %}
+  <section class="featured-section mt-5 text-center">
+    <h2 class="section-title">Featured Paintings</h2>
+    <div class="row g-4 justify-content-center">
+      {% for p in featured %}
+        <div class="col-md-3">
+          <div class="card mb-3 featured-card h-100 shadow-sm border-0">
+            {% if p.featured_image %}
+              <img src="{{ p.featured_image.url }}" class="card-img-top" alt="{{ p.title }}">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ p.title }}</h5>
+              <p class="card-text text-muted">{{ p.artist_name }}</p>
+              <p class="card-text fw-semibold">₹{{ p.price }}</p>
+              <a href="/paintings/{{ p.slug }}/" class="btn btn-sm btn-primary mt-auto">View</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+<section class="categories-section mt-5 text-center">
+  <h2 class="section-title">Categories</h2>
+  <div class="row">
+    {% for c in categories %}
+      <div class="col-md-3">
+        <div class="card mb-3">
+          {% if c.image %}<img src="{{ c.image.url }}" class="card-img-top">{% endif %}
+          <div class="card-body"><h5>{{ c.name }}</h5><p>{{ c.description|truncatechars:80 }}</p></div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% if testimonials %}
+<section class="mt-5">
+  <h3>Testimonials</h3>
+  <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for t in testimonials %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <div class="card text-center">
+            <div class="card-body">
+              <p class="card-text">"{{ t.content }}"</p>
+              <p class="card-text"><strong>{{ t.name }}</strong></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Order received</h2>
+<p>Thank you, {{ order.full_name }}. Your order (ID: {{ order.id }}) has been received.</p>
+<p>We will contact you at {{ order.email }} about shipping.</p>
+{% endblock %}

@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="mb-4">Shopping Cart</h1>
+
+  {% if items %}
+    <div class="row g-4">
+      <!-- Cart Items -->
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Cart Items ({{ items|length }})</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>Painting</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in items %}
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center gap-2">
+                          {% if item.painting.featured_image %}
+                            <img src="{{ item.painting.featured_image.url }}" alt="{{ item.painting.title }}" style="width: 50px; height: 50px; object-fit: cover;">
+                          {% endif %}
+                          <div>
+                            <a href="{{ item.painting.get_absolute_url }}">{{ item.painting.title }}</a>
+                            <p class="text-muted small mb-0">by {{ item.painting.artist_name|default:'Unknown' }}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>₹{{ item.price|floatformat:2 }}</td>
+                      <td>
+                        <form method="POST" action="{% url 'cart:update_quantity' item.painting.id %}" class="d-flex gap-2 align-items-center">
+                          {% csrf_token %}
+                          <input type="number" name="quantity" min="1" value="{{ item.quantity }}" class="form-control" style="width: 60px;">
+                          <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                        </form>
+                      </td>
+                      <td><strong>₹{{ item.subtotal|floatformat:2 }}</strong></td>
+                      <td>
+                        <a href="{% url 'cart:save_for_later' item.painting.id %}" class="btn btn-sm btn-outline-secondary" title="Save for Later">
+                          <i class="fas fa-bookmark"></i>
+                        </a>
+                        <a href="{% url 'cart:cart_remove' item.painting.id %}" class="btn btn-sm btn-outline-danger" title="Remove">
+                          <i class="fas fa-trash"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Save for Later -->
+        {% if saved_items %}
+          <div class="card mt-4">
+            <div class="card-header">
+              <h5 class="mb-0">Saved for Later ({{ saved_items|length }})</h5>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Painting</th>
+                      <th>Price</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in saved_items %}
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center gap-2">
+                            {% if item.painting.featured_image %}
+                              <img src="{{ item.painting.featured_image.url }}" alt="{{ item.painting.title }}" style="width: 50px; height: 50px; object-fit: cover;">
+                            {% endif %}
+                            <a href="{{ item.painting.get_absolute_url }}">{{ item.painting.title }}</a>
+                          </div>
+                        </td>
+                        <td>₹{{ item.price|floatformat:2 }}</td>
+                        <td>
+                          <a href="{% url 'cart:move_to_cart' item.painting.id %}" class="btn btn-sm btn-outline-primary">Move to Cart</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Order Summary -->
+      <div class="col-lg-4">
+        <div class="card sticky-top" style="top: 20px;">
+          <div class="card-header">
+            <h5 class="mb-0">Order Summary</h5>
+          </div>
+          <div class="card-body">
+            <!-- Coupon Section -->
+            <div class="mb-4 pb-4 border-bottom">
+              <form method="POST" action="{% url 'cart:apply_coupon' %}">
+                {% csrf_token %}
+                <div class="input-group">
+                  <input type="text" name="coupon_code" class="form-control" placeholder="Enter coupon code" 
+                         value="{{ coupon_code|default:'' }}" maxlength="50">
+                  <button class="btn btn-outline-primary" type="submit">Apply</button>
+                </div>
+                {% if coupon_error %}
+                  <small class="text-danger d-block mt-2">{{ coupon_error }}</small>
+                {% endif %}
+                {% if coupon_obj %}
+                  <small class="text-success d-block mt-2">✓ Coupon applied: {{ coupon_obj.code }}</small>
+                {% endif %}
+              </form>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal:</span>
+                <strong>₹{{ totals.subtotal|floatformat:2 }}</strong>
+              </div>
+
+              {% if totals.discount > 0 %}
+                <div class="d-flex justify-content-between mb-2 text-success">
+                  <span>Discount:</span>
+                  <strong>-₹{{ totals.discount|floatformat:2 }}</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span>After Discount:</span>
+                  <strong>₹{{ totals.after_discount|floatformat:2 }}</strong>
+                </div>
+              {% endif %}
+
+              <div class="d-flex justify-content-between mb-2">
+                <span>Tax (10%):</span>
+                <strong>₹{{ totals.tax|floatformat:2 }}</strong>
+              </div>
+
+              <div class="d-flex justify-content-between mb-3">
+                <span>Shipping:</span>
+                <strong>₹{{ totals.shipping|floatformat:2 }}</strong>
+              </div>
+            </div>
+
+            <!-- Grand Total -->
+            <div class="border-top pt-3 mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fs-5 fw-bold">Grand Total:</span>
+                <span class="fs-4 fw-bold text-primary">₹{{ totals.grand_total|floatformat:2 }}</span>
+              </div>
+            </div>
+
+            <!-- Checkout Button -->
+            <a href="{% url 'orders:checkout' %}" class="btn btn-primary w-100 btn-lg mb-2">
+              Proceed to Checkout
+            </a>
+            <a href="{% url 'painting_list' %}" class="btn btn-outline-secondary w-100">
+              Continue Shopping
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-info">
+      <h4>Your cart is empty</h4>
+      <p>Add some beautiful paintings to your cart and they will appear here.</p>
+      <a href="{% url 'painting_list' %}" class="btn btn-primary">Browse Paintings</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
