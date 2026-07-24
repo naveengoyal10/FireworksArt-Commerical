@@ -10,7 +10,7 @@ load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'CHANGE_ME_TO_A_SECURE_VALUE')
 
-DEBUG = os.getenv('DEBUG', 'false') == 'True'
+DEBUG = os.getenv('DEBUG', 'true') == 'True'
 
 
 
