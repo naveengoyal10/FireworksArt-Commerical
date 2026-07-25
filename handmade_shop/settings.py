@@ -1,10 +1,25 @@
 import os
 from pathlib import Path
+from urllib.parse import urlparse
 from dotenv import load_dotenv
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+def parse_cloudinary_url(cloudinary_url):
+    parsed = urlparse(cloudinary_url)
+    if parsed.scheme.lower() != 'cloudinary':
+        raise ImproperlyConfigured("Invalid CLOUDINARY_URL. It must start with 'cloudinary://'")
+    if not parsed.hostname or not parsed.username or not parsed.password:
+        raise ImproperlyConfigured(
+            "Invalid CLOUDINARY_URL. It must include cloud_name, api_key, and api_secret."
+        )
+    return {
+        'cloudinary_name': parsed.hostname,
+        'cloudinary_api_key': parsed.username,
+        'cloudinary_api_secret': parsed.password,
+    }
 
 # load environment variables from .env in project root
 load_dotenv(BASE_DIR / '.env')
@@ -130,38 +145,31 @@ cloudinary_api_key = os.getenv('CLOUDINARY_API_KEY')
 cloudinary_api_secret = os.getenv('CLOUDINARY_API_SECRET')
 
 if cloudinary_url or cloudinary_name or cloudinary_api_key or cloudinary_api_secret:
-    if cloudinary_url and not cloudinary_url.startswith('cloudinary://'):
-        raise ImproperlyConfigured(
-            "Invalid CLOUDINARY_URL. It must start with 'cloudinary://'"
-        )
-
     import cloudinary
 
     if cloudinary_url:
-        # Importing cloudinary already parses CLOUDINARY_URL into config.
-        pass
-    else:
-        if not (cloudinary_name and cloudinary_api_key and cloudinary_api_secret):
-            raise ImproperlyConfigured(
-                "Cloudinary configuration requires CLOUDINARY_URL or all of "
-                "CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET."
-            )
-        cloudinary.config(
-            cloud_name=cloudinary_name,
-            api_key=cloudinary_api_key,
-            api_secret=cloudinary_api_secret,
+        parsed = parse_cloudinary_url(cloudinary_url)
+        cloudinary_name = parsed['cloudinary_name']
+        cloudinary_api_key = parsed['cloudinary_api_key']
+        cloudinary_api_secret = parsed['cloudinary_api_secret']
+
+    if not (cloudinary_name and cloudinary_api_key and cloudinary_api_secret):
+        raise ImproperlyConfigured(
+            "Cloudinary configuration requires CLOUDINARY_URL or all of "
+            "CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET."
         )
 
-    cloudinary_config = cloudinary.config()
-    if not getattr(cloudinary_config, 'cloud_name', None):
+    cloudinary.config(
+        cloud_name=cloudinary_name,
+        api_key=cloudinary_api_key,
+        api_secret=cloudinary_api_secret,
+    )
+
+    if not cloudinary_name:
         raise ImproperlyConfigured(
             "Cloudinary configuration is invalid: cloud_name is missing. "
             "Check CLOUDINARY_URL or CLOUDINARY_CLOUD_NAME/CLOUDINARY_API_KEY/CLOUDINARY_API_SECRET."
         )
-
-    cloudinary_name = cloudinary_name or cloudinary_config.cloud_name
-    cloudinary_api_key = cloudinary_api_key or cloudinary_config.api_key
-    cloudinary_api_secret = cloudinary_api_secret or cloudinary_config.api_secret
 
     INSTALLED_APPS += [
         'cloudinary',
