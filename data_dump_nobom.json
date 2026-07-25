@@ -1,0 +1,2709 @@
+[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "shop",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "shop",
+    "model": "product"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "shop",
+    "model": "order"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "shop",
+    "model": "orderitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "paintings",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "paintings",
+    "model": "painting"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "order"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "orders",
+    "model": "orderitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "profile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "accounts",
+    "model": "address"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "paintings",
+    "model": "heroslider"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "paintings",
+    "model": "paintingimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "instagrampost"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "newslettersubscriber"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "testimonial"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "blog",
+    "model": "post"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "reviews",
+    "model": "review"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "cart",
+    "model": "coupon"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "reviews",
+    "model": "reviewimage"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "blog",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "blog",
+    "model": "tag"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "blog",
+    "model": "comment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "newslettercampaign"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "contact"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "core",
+    "model": "sitesettings"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "cart",
+    "model": "cart"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "cart",
+    "model": "cartitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "payments",
+    "model": "payment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "wishlist",
+    "model": "wishlist"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "wishlist",
+    "model": "wishlistitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sites",
+    "model": "site"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "account",
+    "model": "emailaddress"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "account",
+    "model": "emailconfirmation"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "socialaccount",
+    "model": "socialaccount"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "socialaccount",
+    "model": "socialapp"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "socialaccount",
+    "model": "socialtoken"
+  }
+},
+{
+  "model": "sites.site",
+  "fields": {
+    "domain": "127.0.0.1:8000",
+    "name": "127.0.0.1:8000"
+  }
+},
+{
+  "model": "shop.order",
+  "pk": 1,
+  "fields": {
+    "full_name": "naveen",
+    "email": "naveengoyal10@gmail.com",
+    "address": "F-1908",
+    "created": "2026-07-02T11:06:55.568Z",
+    "paid": false
+  }
+},
+{
+  "model": "shop.order",
+  "pk": 2,
+  "fields": {
+    "full_name": "naveen",
+    "email": "naveengoyal10@gmail.com",
+    "address": "F-1908",
+    "created": "2026-07-02T11:10:25.936Z",
+    "paid": false
+  }
+},
+{
+  "model": "paintings.category",
+  "pk": 2,
+  "fields": {
+    "name": "Spritual",
+    "slug": "Spritual",
+    "image": "categories/Designer.png",
+    "description": "Discover paintings inspired by India's rich spiritual heritage. Each artwork reflects divine stories, sacred symbolism, and the enduring beauty of faith, bringing peace, positivity, and cultural elegance into your space"
+  }
+},
+{
+  "model": "paintings.category",
+  "pk": 3,
+  "fields": {
+    "name": "Horse",
+    "slug": "horse",
+    "image": "categories/Designer_1.png",
+    "description": "Black Beauty captures the grace, strength, and free spirit of a majestic horse in motion, making it a timeless symbol of power and elegance."
+  }
+},
+{
+  "model": "paintings.category",
+  "pk": 4,
+  "fields": {
+    "name": "Budha",
+    "slug": "budha",
+    "image": "categories/Designer_2.png",
+    "description": "Discover serene Buddha paintings that inspire peace, mindfulness, and spiritual well-being, creating a calming atmosphere for your home or meditation space."
+  }
+},
+{
+  "model": "paintings.painting",
+  "pk": 1,
+  "fields": {
+    "title": "Crimson Hibiscus Bloom",
+    "slug": "crimson-hibiscus-bloom",
+    "artist_name": "Shruti Agarwal",
+    "description": "A celebration of natureÆs vibrant beauty, Crimson Hibiscus Bloom captures the striking elegance of a hibiscus flower in full bloom. Rich crimson petals unfold gracefully against a warm, neutral background, creating a captivating contrast that draws the eye to every delicate detail. The lush green leaves add depth and freshness, enhancing the flowerÆs natural charm.\r\nThis artwork embodies passion, vitality, and the timeless beauty of botanical subjects. Carefully crafted with attention to texture, color, and form, the painting brings warmth and sophistication to any living space. Whether displayed as a focal point or as part of a curated collection, it invites viewers to pause and appreciate the simple yet extraordinary wonders of nature.\r\nPerfect for homes, offices, and creative spaces, Crimson Hibiscus Bloom adds a touch of tropical elegance and artistic refinement to any setting.",
+    "story": "In a quiet garden kissed by the golden light of dawn, a single hibiscus flower stood taller and brighter than the rest. While the surrounding blooms swayed gently in the breeze, this crimson blossom seemed to hold a silent confidence, embracing every ray of sunlight that touched its petals.\r\nThe flower had weathered storms, heavy rains, and scorching summer days, yet it continued to bloom with remarkable grace. Its vibrant red petals became a symbol of resilience, reminding all who passed by that true beauty is not found in perfection but in the courage to flourish despite life's challenges.\r\nInspired by this enduring spirit, Crimson Hibiscus Bloom was created to celebrate strength, passion, and renewal. The rich crimson tones reflect the energy of life, while the lush green leaves symbolize growth, hope, and fresh beginnings. Every brushstroke seeks to capture the delicate balance between boldness and elegance that nature so effortlessly displays.\r\nThis painting invites viewers to pause, breathe, and appreciate the beauty that surrounds them. It serves as a reminder that, like the hibiscus, we all possess the ability to bloom brilliantly in our own season, bringing color, warmth, and inspiration to the world around us.\r\n\"The most beautiful flowers are those that choose to bloom, even after the storm.",
+    "price": "300.00",
+    "discount_price": null,
+    "stock": 2,
+    "sku": "",
+    "medium": "",
+    "size": "",
+    "orientation": "portrait",
+    "frame_option": false,
+    "weight": null,
+    "featured_image": "paintings/1000303729.jpg",
+    "status": "published",
+    "show_in_shop": true,
+    "featured": true,
+    "bestseller": false,
+    "new_arrival": false,
+    "created": "2026-07-02T09:30:50Z",
+    "updated": "2026-07-24T10:06:33.315Z",
+    "categories": []
+  }
+},
+{
+  "model": "paintings.painting",
+  "pk": 2,
+  "fields": {
+    "title": "Symphony of the Evening Sky",
+    "slug": "symphony-of-the-evening-sky",
+    "artist_name": "Shruti Agarwal",
+    "description": "Twilight Reflections captures the magical transition between day and night, where the sky becomes a canvas of radiant colors. Vibrant shades of violet, blue, pink, and gold blend effortlessly across dramatic clouds, while their luminous reflections dance upon the calm waters below.\r\nThe painting celebrates nature's ever-changing beauty, inviting viewers into a tranquil moment of stillness and wonder. Bold brushstrokes and expressive colors create movement in both the sky and water, drawing the eye toward the glowing horizon. The interplay of light and reflection adds depth and emotion, making the artwork both captivating and peaceful.\r\nPerfect for living rooms, hallways, offices, or meditation spaces, this artwork brings warmth, elegance, and a sense of serenity to any interior.",
+    "story": "There are moments in nature that last only a few minutes yet remain etched in our memories forever. Twilight Reflections was inspired by one such fleeting moment.\r\nAs the sun began its descent beyond the horizon, the sky transformed into a breathtaking display of color. Deep blues mingled with radiant pinks and glowing golds, while the quiet water below mirrored every changing hue. The world seemed to pause, suspended between daylight and darkness.\r\nStanding before this scene, there was a sense of calm and clarity. The rippling reflections on the water felt like life's journey itself. Some moments are bright and certain, while others appear blurred and uncertain, yet all contribute to a beautiful and meaningful whole.\r\nThrough this painting, I wanted to capture not only the beauty of the sunset but also the feeling it evokes: peace, hope, and reflection. The vibrant sky symbolizes dreams and possibilities, while the water reminds us to embrace change with grace and confidence.\r\nTwilight Reflections is an invitation to slow down, appreciate the beauty around us, and remember that even as one chapter ends, another beautiful horizon awaits",
+    "price": "500.00",
+    "discount_price": null,
+    "stock": 1,
+    "sku": "",
+    "medium": "",
+    "size": "",
+    "orientation": "portrait",
+    "frame_option": false,
+    "weight": null,
+    "featured_image": "paintings/1000303725_OmcMU95.jpg",
+    "status": "published",
+    "show_in_shop": true,
+    "featured": true,
+    "bestseller": false,
+    "new_arrival": false,
+    "created": "2026-07-24T10:11:04Z",
+    "updated": "2026-07-24T10:12:22.453Z",
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "paintings.painting",
+  "pk": 3,
+  "fields": {
+    "title": "Divine Harmony: Radha & Krishna",
+    "slug": "divine-harmony-radha-krishna",
+    "artist_name": "Shruti Agarwal",
+    "description": "Divine Harmony: Radha & Krishna is a vibrant celebration of love, devotion, and spiritual connection. The painting portrays the timeless bond between Radha and Krishna, surrounded by the tranquility of nature. Krishna, adorned with the iconic peacock feather and flute, is depicted alongside Radha in a moment of serene togetherness, while the gentle presence of a cow symbolizes purity, abundance, and divine grace.\r\nRich hues of blue, green, and golden saffron create a harmonious composition that radiates warmth and spirituality. The expressive forms and traditional artistic style bring a sense of cultural heritage while offering a contemporary appeal for modern interiors.\r\nThis artwork serves as a reminder of unconditional love, inner peace, and the beauty of living in harmony with nature and the divine. Whether displayed in a living room, meditation space, or spiritual corner, it adds a sense of elegance, devotion, and positive energy to any setting.\r\nMedium: Acrylic on Canvas\r\nTheme: Spiritual Art | Indian Mythology | Devotional Art\r\nStyle: Contemporary Folk Art\r\nKeywords: Radha Krishna Painting, Indian Art, Spiritual Wall Decor, Krishna Artwork, Handmade Painting, Traditional Indian Painting, Devotional Art",
+    "story": "Long ago, in the lush groves of Vrindavan, the melodies of Krishna's flute were said to fill the air with magic and peace. Every note carried a message of love, devotion, and unity, drawing all living beings closer to the divine. Among those enchanted by this heavenly music was Radha, whose connection with Krishna transcended words and became a symbol of eternal love.\r\nInspired by this timeless tale, Divine Harmony: Radha & Krishna captures a quiet moment of togetherness. There is no grand celebration, only the gentle presence of companionship, trust, and mutual understanding. The flute represents the music of the soul, while the peacock feather symbolizes beauty, wisdom, and spiritual awakening. The cow standing nearby reflects the simplicity and purity of life in harmony with nature.\r\nThrough vibrant colors and expressive brushstrokes, this painting seeks to convey more than a story from mythology. It speaks of the enduring bonds that connect hearts, the peace found in devotion, and the beauty of living with love and compassion.\r\nAs viewers gaze upon the artwork, they are invited to pause amid life's noise and remember that true harmony is found not in possessions or achievements, but in connection, kindness, and the timeless melody of the heart.\r\n\"Where love is pure, the soul finds its music, and every moment becomes divine.",
+    "price": "1000.00",
+    "discount_price": null,
+    "stock": 1,
+    "sku": "",
+    "medium": "",
+    "size": "",
+    "orientation": "portrait",
+    "frame_option": false,
+    "weight": null,
+    "featured_image": "paintings/1000303735.jpg",
+    "status": "published",
+    "show_in_shop": true,
+    "featured": true,
+    "bestseller": false,
+    "new_arrival": false,
+    "created": "2026-07-24T10:26:14Z",
+    "updated": "2026-07-24T10:28:34.260Z",
+    "categories": []
+  }
+},
+{
+  "model": "paintings.painting",
+  "pk": 5,
+  "fields": {
+    "title": "Divine Serenity",
+    "slug": "divine-serenity",
+    "artist_name": "Shruti Agarwal",
+    "description": "Divine Serenity is a captivating monochromatic artwork inspired by Lord Krishna's divine presence. Rendered in elegant shades of black, white, and silver, the painting highlights intricate ornamental details, a graceful peacock feather, and a serene expression that symbolizes peace, wisdom, and spiritual harmony.\r\nThe minimalist palette enhances the artwork's timeless beauty, allowing every texture and decorative element to stand out with remarkable depth. Perfect for meditation spaces, living rooms, offices, and spiritual corners, this painting creates a calming atmosphere while adding sophistication to any interior.\r\nCategory: Spiritual Art\r\nMedium: Acrylic on Canvas\r\nStyle: Contemporary Spiritual Art",
+    "story": "In moments of silence, the soul often finds its deepest connection with the divine. Divine Serenity was created to capture that sacred stillness.\r\nThe serene face represents inner peace beyond worldly distractions, while the ornate crown and peacock feather symbolize beauty, wisdom, and spiritual awakening. The monochrome tones remind us that true spirituality transcends color, status, and material possessions, leading us toward simplicity and self-discovery.\r\nThis artwork invites the viewer to pause, breathe, and embrace the calm that exists within. It serves as a gentle reminder that amid life's noise and constant movement, peace is never far away. It resides quietly in the heart, waiting to be discovered.\r\n\"Where the mind becomes still, the soul begins to listen.",
+    "price": "1500.00",
+    "discount_price": null,
+    "stock": 0,
+    "sku": "",
+    "medium": "",
+    "size": "",
+    "orientation": "portrait",
+    "frame_option": false,
+    "weight": null,
+    "featured_image": "paintings/Designer_3.png",
+    "status": "published",
+    "show_in_shop": true,
+    "featured": true,
+    "bestseller": false,
+    "new_arrival": false,
+    "created": "2026-07-25T06:11:52Z",
+    "updated": "2026-07-25T06:17:48.449Z",
+    "categories": [
+      2
+    ]
+  }
+},
+{
+  "model": "paintings.heroslider",
+  "pk": 14,
+  "fields": {
+    "title": "",
+    "subtitle": "",
+    "image": "",
+    "link": "",
+    "order": 0,
+    "active": true
+  }
+},
+{
+  "model": "paintings.heroslider",
+  "pk": 18,
+  "fields": {
+    "title": "",
+    "subtitle": "",
+    "image": "",
+    "link": "",
+    "order": 0,
+    "active": true
+  }
+},
+{
+  "model": "paintings.heroslider",
+  "pk": 19,
+  "fields": {
+    "title": "Bring Your Walls to Life with Timeless Art",
+    "subtitle": "Original handmade paintings that blend culture, color, and creativity into every space.",
+    "image": "hero/1000303735_TMhZTxG.jpg",
+    "link": "",
+    "order": 0,
+    "active": true
+  }
+},
+{
+  "model": "orders.orderitem",
+  "pk": 5,
+  "fields": {
+    "order": 5,
+    "painting": 5,
+    "price": "1500.00",
+    "quantity": 1,
+    "created": "2026-07-25T06:22:54.997Z"
+  }
+},
+{
+  "model": "blog.category",
+  "pk": 1,
+  "fields": {
+    "name": "HandMade",
+    "slug": "handmade",
+    "description": "Handmade testing",
+    "active": true
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add category",
+    "content_type": [
+      "shop",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change category",
+    "content_type": [
+      "shop",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete category",
+    "content_type": [
+      "shop",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view category",
+    "content_type": [
+      "shop",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add product",
+    "content_type": [
+      "shop",
+      "product"
+    ],
+    "codename": "add_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change product",
+    "content_type": [
+      "shop",
+      "product"
+    ],
+    "codename": "change_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete product",
+    "content_type": [
+      "shop",
+      "product"
+    ],
+    "codename": "delete_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view product",
+    "content_type": [
+      "shop",
+      "product"
+    ],
+    "codename": "view_product"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add order",
+    "content_type": [
+      "shop",
+      "order"
+    ],
+    "codename": "add_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change order",
+    "content_type": [
+      "shop",
+      "order"
+    ],
+    "codename": "change_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete order",
+    "content_type": [
+      "shop",
+      "order"
+    ],
+    "codename": "delete_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view order",
+    "content_type": [
+      "shop",
+      "order"
+    ],
+    "codename": "view_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add order item",
+    "content_type": [
+      "shop",
+      "orderitem"
+    ],
+    "codename": "add_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change order item",
+    "content_type": [
+      "shop",
+      "orderitem"
+    ],
+    "codename": "change_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete order item",
+    "content_type": [
+      "shop",
+      "orderitem"
+    ],
+    "codename": "delete_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view order item",
+    "content_type": [
+      "shop",
+      "orderitem"
+    ],
+    "codename": "view_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add category",
+    "content_type": [
+      "paintings",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change category",
+    "content_type": [
+      "paintings",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete category",
+    "content_type": [
+      "paintings",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view category",
+    "content_type": [
+      "paintings",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add painting",
+    "content_type": [
+      "paintings",
+      "painting"
+    ],
+    "codename": "add_painting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change painting",
+    "content_type": [
+      "paintings",
+      "painting"
+    ],
+    "codename": "change_painting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete painting",
+    "content_type": [
+      "paintings",
+      "painting"
+    ],
+    "codename": "delete_painting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view painting",
+    "content_type": [
+      "paintings",
+      "painting"
+    ],
+    "codename": "view_painting"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "add_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "change_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "delete_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view order",
+    "content_type": [
+      "orders",
+      "order"
+    ],
+    "codename": "view_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "add_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "change_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "delete_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view order item",
+    "content_type": [
+      "orders",
+      "orderitem"
+    ],
+    "codename": "view_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "add_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "change_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "delete_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view profile",
+    "content_type": [
+      "accounts",
+      "profile"
+    ],
+    "codename": "view_profile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add address",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "add_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change address",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "change_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete address",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "delete_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view address",
+    "content_type": [
+      "accounts",
+      "address"
+    ],
+    "codename": "view_address"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add hero slider",
+    "content_type": [
+      "paintings",
+      "heroslider"
+    ],
+    "codename": "add_heroslider"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change hero slider",
+    "content_type": [
+      "paintings",
+      "heroslider"
+    ],
+    "codename": "change_heroslider"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete hero slider",
+    "content_type": [
+      "paintings",
+      "heroslider"
+    ],
+    "codename": "delete_heroslider"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view hero slider",
+    "content_type": [
+      "paintings",
+      "heroslider"
+    ],
+    "codename": "view_heroslider"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add painting image",
+    "content_type": [
+      "paintings",
+      "paintingimage"
+    ],
+    "codename": "add_paintingimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change painting image",
+    "content_type": [
+      "paintings",
+      "paintingimage"
+    ],
+    "codename": "change_paintingimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete painting image",
+    "content_type": [
+      "paintings",
+      "paintingimage"
+    ],
+    "codename": "delete_paintingimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view painting image",
+    "content_type": [
+      "paintings",
+      "paintingimage"
+    ],
+    "codename": "view_paintingimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add instagram post",
+    "content_type": [
+      "core",
+      "instagrampost"
+    ],
+    "codename": "add_instagrampost"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change instagram post",
+    "content_type": [
+      "core",
+      "instagrampost"
+    ],
+    "codename": "change_instagrampost"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete instagram post",
+    "content_type": [
+      "core",
+      "instagrampost"
+    ],
+    "codename": "delete_instagrampost"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view instagram post",
+    "content_type": [
+      "core",
+      "instagrampost"
+    ],
+    "codename": "view_instagrampost"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add newsletter subscriber",
+    "content_type": [
+      "core",
+      "newslettersubscriber"
+    ],
+    "codename": "add_newslettersubscriber"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change newsletter subscriber",
+    "content_type": [
+      "core",
+      "newslettersubscriber"
+    ],
+    "codename": "change_newslettersubscriber"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete newsletter subscriber",
+    "content_type": [
+      "core",
+      "newslettersubscriber"
+    ],
+    "codename": "delete_newslettersubscriber"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view newsletter subscriber",
+    "content_type": [
+      "core",
+      "newslettersubscriber"
+    ],
+    "codename": "view_newslettersubscriber"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add testimonial",
+    "content_type": [
+      "core",
+      "testimonial"
+    ],
+    "codename": "add_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change testimonial",
+    "content_type": [
+      "core",
+      "testimonial"
+    ],
+    "codename": "change_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete testimonial",
+    "content_type": [
+      "core",
+      "testimonial"
+    ],
+    "codename": "delete_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view testimonial",
+    "content_type": [
+      "core",
+      "testimonial"
+    ],
+    "codename": "view_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add post",
+    "content_type": [
+      "blog",
+      "post"
+    ],
+    "codename": "add_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change post",
+    "content_type": [
+      "blog",
+      "post"
+    ],
+    "codename": "change_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete post",
+    "content_type": [
+      "blog",
+      "post"
+    ],
+    "codename": "delete_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view post",
+    "content_type": [
+      "blog",
+      "post"
+    ],
+    "codename": "view_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add review",
+    "content_type": [
+      "reviews",
+      "review"
+    ],
+    "codename": "add_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change review",
+    "content_type": [
+      "reviews",
+      "review"
+    ],
+    "codename": "change_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete review",
+    "content_type": [
+      "reviews",
+      "review"
+    ],
+    "codename": "delete_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view review",
+    "content_type": [
+      "reviews",
+      "review"
+    ],
+    "codename": "view_review"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add coupon",
+    "content_type": [
+      "cart",
+      "coupon"
+    ],
+    "codename": "add_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change coupon",
+    "content_type": [
+      "cart",
+      "coupon"
+    ],
+    "codename": "change_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete coupon",
+    "content_type": [
+      "cart",
+      "coupon"
+    ],
+    "codename": "delete_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view coupon",
+    "content_type": [
+      "cart",
+      "coupon"
+    ],
+    "codename": "view_coupon"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add review image",
+    "content_type": [
+      "reviews",
+      "reviewimage"
+    ],
+    "codename": "add_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change review image",
+    "content_type": [
+      "reviews",
+      "reviewimage"
+    ],
+    "codename": "change_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete review image",
+    "content_type": [
+      "reviews",
+      "reviewimage"
+    ],
+    "codename": "delete_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view review image",
+    "content_type": [
+      "reviews",
+      "reviewimage"
+    ],
+    "codename": "view_reviewimage"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add category",
+    "content_type": [
+      "blog",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change category",
+    "content_type": [
+      "blog",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete category",
+    "content_type": [
+      "blog",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view category",
+    "content_type": [
+      "blog",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add tag",
+    "content_type": [
+      "blog",
+      "tag"
+    ],
+    "codename": "add_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change tag",
+    "content_type": [
+      "blog",
+      "tag"
+    ],
+    "codename": "change_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete tag",
+    "content_type": [
+      "blog",
+      "tag"
+    ],
+    "codename": "delete_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view tag",
+    "content_type": [
+      "blog",
+      "tag"
+    ],
+    "codename": "view_tag"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add comment",
+    "content_type": [
+      "blog",
+      "comment"
+    ],
+    "codename": "add_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change comment",
+    "content_type": [
+      "blog",
+      "comment"
+    ],
+    "codename": "change_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete comment",
+    "content_type": [
+      "blog",
+      "comment"
+    ],
+    "codename": "delete_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view comment",
+    "content_type": [
+      "blog",
+      "comment"
+    ],
+    "codename": "view_comment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add newsletter campaign",
+    "content_type": [
+      "core",
+      "newslettercampaign"
+    ],
+    "codename": "add_newslettercampaign"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change newsletter campaign",
+    "content_type": [
+      "core",
+      "newslettercampaign"
+    ],
+    "codename": "change_newslettercampaign"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete newsletter campaign",
+    "content_type": [
+      "core",
+      "newslettercampaign"
+    ],
+    "codename": "delete_newslettercampaign"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view newsletter campaign",
+    "content_type": [
+      "core",
+      "newslettercampaign"
+    ],
+    "codename": "view_newslettercampaign"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add contact",
+    "content_type": [
+      "core",
+      "contact"
+    ],
+    "codename": "add_contact"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change contact",
+    "content_type": [
+      "core",
+      "contact"
+    ],
+    "codename": "change_contact"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete contact",
+    "content_type": [
+      "core",
+      "contact"
+    ],
+    "codename": "delete_contact"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view contact",
+    "content_type": [
+      "core",
+      "contact"
+    ],
+    "codename": "view_contact"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Site Setting",
+    "content_type": [
+      "core",
+      "sitesettings"
+    ],
+    "codename": "add_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Site Setting",
+    "content_type": [
+      "core",
+      "sitesettings"
+    ],
+    "codename": "change_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Site Setting",
+    "content_type": [
+      "core",
+      "sitesettings"
+    ],
+    "codename": "delete_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Site Setting",
+    "content_type": [
+      "core",
+      "sitesettings"
+    ],
+    "codename": "view_sitesettings"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "add_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "change_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "delete_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view cart",
+    "content_type": [
+      "cart",
+      "cart"
+    ],
+    "codename": "view_cart"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "add_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "change_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "delete_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view cart item",
+    "content_type": [
+      "cart",
+      "cartitem"
+    ],
+    "codename": "view_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add Payment",
+    "content_type": [
+      "payments",
+      "payment"
+    ],
+    "codename": "add_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change Payment",
+    "content_type": [
+      "payments",
+      "payment"
+    ],
+    "codename": "change_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete Payment",
+    "content_type": [
+      "payments",
+      "payment"
+    ],
+    "codename": "delete_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view Payment",
+    "content_type": [
+      "payments",
+      "payment"
+    ],
+    "codename": "view_payment"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add wishlist",
+    "content_type": [
+      "wishlist",
+      "wishlist"
+    ],
+    "codename": "add_wishlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change wishlist",
+    "content_type": [
+      "wishlist",
+      "wishlist"
+    ],
+    "codename": "change_wishlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete wishlist",
+    "content_type": [
+      "wishlist",
+      "wishlist"
+    ],
+    "codename": "delete_wishlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view wishlist",
+    "content_type": [
+      "wishlist",
+      "wishlist"
+    ],
+    "codename": "view_wishlist"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add wishlist item",
+    "content_type": [
+      "wishlist",
+      "wishlistitem"
+    ],
+    "codename": "add_wishlistitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change wishlist item",
+    "content_type": [
+      "wishlist",
+      "wishlistitem"
+    ],
+    "codename": "change_wishlistitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete wishlist item",
+    "content_type": [
+      "wishlist",
+      "wishlistitem"
+    ],
+    "codename": "delete_wishlistitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view wishlist item",
+    "content_type": [
+      "wishlist",
+      "wishlistitem"
+    ],
+    "codename": "view_wishlistitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add site",
+    "content_type": [
+      "sites",
+      "site"
+    ],
+    "codename": "add_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change site",
+    "content_type": [
+      "sites",
+      "site"
+    ],
+    "codename": "change_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete site",
+    "content_type": [
+      "sites",
+      "site"
+    ],
+    "codename": "delete_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view site",
+    "content_type": [
+      "sites",
+      "site"
+    ],
+    "codename": "view_site"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "add_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "change_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "delete_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view email address",
+    "content_type": [
+      "account",
+      "emailaddress"
+    ],
+    "codename": "view_emailaddress"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "add_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "change_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "delete_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view email confirmation",
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ],
+    "codename": "view_emailconfirmation"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add social account",
+    "content_type": [
+      "socialaccount",
+      "socialaccount"
+    ],
+    "codename": "add_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change social account",
+    "content_type": [
+      "socialaccount",
+      "socialaccount"
+    ],
+    "codename": "change_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete social account",
+    "content_type": [
+      "socialaccount",
+      "socialaccount"
+    ],
+    "codename": "delete_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view social account",
+    "content_type": [
+      "socialaccount",
+      "socialaccount"
+    ],
+    "codename": "view_socialaccount"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add social application",
+    "content_type": [
+      "socialaccount",
+      "socialapp"
+    ],
+    "codename": "add_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change social application",
+    "content_type": [
+      "socialaccount",
+      "socialapp"
+    ],
+    "codename": "change_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete social application",
+    "content_type": [
+      "socialaccount",
+      "socialapp"
+    ],
+    "codename": "delete_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view social application",
+    "content_type": [
+      "socialaccount",
+      "socialapp"
+    ],
+    "codename": "view_socialapp"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add social application token",
+    "content_type": [
+      "socialaccount",
+      "socialtoken"
+    ],
+    "codename": "add_socialtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change social application token",
+    "content_type": [
+      "socialaccount",
+      "socialtoken"
+    ],
+    "codename": "change_socialtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete social application token",
+    "content_type": [
+      "socialaccount",
+      "socialtoken"
+    ],
+    "codename": "delete_socialtoken"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view social application token",
+    "content_type": [
+      "socialaccount",
+      "socialtoken"
+    ],
+    "codename": "view_socialtoken"
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$nlzNVNxa7Vzb2YHfV8Ccc6$FW7/KLniHahjnymaYK2JHw3rBYkFaBXNMo2+fHw2Axw=",
+    "last_login": "2026-07-25T06:06:43.476Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "naveengoyal10@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-07-02T08:57:46.765Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$5gzyqoRk4B5UeXPgwUecND$I/Cp1iPvWEOhsY4LGe8vSvURIJCymy7VtUg8yXYXNIU=",
+    "last_login": "2026-07-07T06:25:21.966Z",
+    "is_superuser": false,
+    "username": "naveen10",
+    "first_name": "naveen",
+    "last_name": "goyal",
+    "email": "naveengoyal10@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-07T06:25:21.527Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$3vIJJLPZdpvYRKd7wmXVBR$sH2llj6LaxZw6asEaXeFIoUg3ung+LXOF6/Ek800FvA=",
+    "last_login": "2026-07-25T06:06:14.203Z",
+    "is_superuser": false,
+    "username": "GN10",
+    "first_name": "naveen",
+    "last_name": "goyal",
+    "email": "naveengoyal10@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-24T12:45:42.300Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$WYRgKSldznIQrcQt3LsuXD$q1SlUOUnG+3KFdmbP3f5Z4ojDAfZViQHaXmvPPytDh0=",
+    "last_login": "2026-07-25T06:23:05.810Z",
+    "is_superuser": false,
+    "username": "NG10",
+    "first_name": "naveen",
+    "last_name": "goyal",
+    "email": "naveengoyal10@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-25T05:44:17.878Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$MiPE6DmZ7B6oeIiCuMyILs$0ONK9v+9PN8cIvzzltQJkxHuM9XJrxhgr/kZd74uat0=",
+    "last_login": "2026-07-25T05:46:11.092Z",
+    "is_superuser": false,
+    "username": "NGo10",
+    "first_name": "naveen",
+    "last_name": "goyal",
+    "email": "naveengoyal10@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-25T05:46:10.900Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "phone": "",
+    "bio": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "naveen10"
+    ],
+    "phone": "9703203355",
+    "bio": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "GN10"
+    ],
+    "phone": "9703203355",
+    "bio": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "NG10"
+    ],
+    "phone": "9703203355",
+    "bio": ""
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "NGo10"
+    ],
+    "phone": "9703203355",
+    "bio": ""
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "NG10"
+    ],
+    "full_name": "naveen",
+    "email": "naveengoyal10@gmail.com",
+    "phone": "9703203355",
+    "billing_address": "F-1908 R7 life republic",
+    "billing_city": "Pune",
+    "billing_state": "Maharashtra",
+    "billing_postal_code": "411057",
+    "billing_country": "India",
+    "shipping_address": "F-1908 R7 life republic",
+    "shipping_city": "Pune",
+    "shipping_state": "Maharashtra",
+    "shipping_postal_code": "411057",
+    "shipping_country": "India",
+    "same_as_billing": true,
+    "subtotal": "700.00",
+    "discount": "0.00",
+    "tax": "70.00",
+    "shipping_cost": "10.00",
+    "total": "780.00",
+    "coupon_code": "",
+    "payment_method": "razorpay",
+    "payment_status": "pending",
+    "razorpay_order_id": "",
+    "razorpay_payment_id": "",
+    "stripe_payment_intent": "",
+    "status": "cancelled",
+    "notes": "Order cancelled by customer.",
+    "created": "2026-07-25T05:50:51.639Z",
+    "updated": "2026-07-25T05:56:16.580Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "NG10"
+    ],
+    "full_name": "naveen",
+    "email": "naveengoyal10@gmail.com",
+    "phone": "9703203355",
+    "billing_address": "F-1908 R7 life republic",
+    "billing_city": "Pune",
+    "billing_state": "Maharashtra",
+    "billing_postal_code": "411057",
+    "billing_country": "India",
+    "shipping_address": "F-1908 R7 life republic",
+    "shipping_city": "Pune",
+    "shipping_state": "Maharashtra",
+    "shipping_postal_code": "411057",
+    "shipping_country": "India",
+    "same_as_billing": true,
+    "subtotal": "700.00",
+    "discount": "0.00",
+    "tax": "70.00",
+    "shipping_cost": "10.00",
+    "total": "780.00",
+    "coupon_code": "",
+    "payment_method": "razorpay",
+    "payment_status": "pending",
+    "razorpay_order_id": "",
+    "razorpay_payment_id": "",
+    "stripe_payment_intent": "",
+    "status": "cancelled",
+    "notes": "Order cancelled by customer.",
+    "created": "2026-07-25T05:51:40.167Z",
+    "updated": "2026-07-25T05:56:28.058Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "NG10"
+    ],
+    "full_name": "naveen",
+    "email": "naveengoyal10@gmail.com",
+    "phone": "9703203355",
+    "billing_address": "F-1908 R7 life republic",
+    "billing_city": "Pune",
+    "billing_state": "Maharashtra",
+    "billing_postal_code": "411057",
+    "billing_country": "India",
+    "shipping_address": "F-1908 R7 life republic",
+    "shipping_city": "Pune",
+    "shipping_state": "Maharashtra",
+    "shipping_postal_code": "411057",
+    "shipping_country": "India",
+    "same_as_billing": true,
+    "subtotal": "700.00",
+    "discount": "0.00",
+    "tax": "70.00",
+    "shipping_cost": "10.00",
+    "total": "780.00",
+    "coupon_code": "",
+    "payment_method": "razorpay",
+    "payment_status": "pending",
+    "razorpay_order_id": "",
+    "razorpay_payment_id": "",
+    "stripe_payment_intent": "",
+    "status": "cancelled",
+    "notes": "Order cancelled by customer.",
+    "created": "2026-07-25T05:55:06.379Z",
+    "updated": "2026-07-25T05:57:09.357Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "NG10"
+    ],
+    "full_name": "naveen",
+    "email": "naveengoyal10@gmail.com",
+    "phone": "9703203355",
+    "billing_address": "R7 life republic",
+    "billing_city": "Pune",
+    "billing_state": "Maharashtra",
+    "billing_postal_code": "411057",
+    "billing_country": "India",
+    "shipping_address": "R7 life republic",
+    "shipping_city": "Pune",
+    "shipping_state": "Maharashtra",
+    "shipping_postal_code": "411057",
+    "shipping_country": "India",
+    "same_as_billing": true,
+    "subtotal": "700.00",
+    "discount": "0.00",
+    "tax": "70.00",
+    "shipping_cost": "10.00",
+    "total": "780.00",
+    "coupon_code": "",
+    "payment_method": "cod",
+    "payment_status": "refunded",
+    "razorpay_order_id": "",
+    "razorpay_payment_id": "",
+    "stripe_payment_intent": "",
+    "status": "cancelled",
+    "notes": "Order cancelled by customer.",
+    "created": "2026-07-25T05:55:52.241Z",
+    "updated": "2026-07-25T05:57:00.995Z"
+  }
+},
+{
+  "model": "orders.order",
+  "pk": 5,
+  "fields": {
+    "user": null,
+    "full_name": "Raksha",
+    "email": "raksha.shady@gmail.com",
+    "phone": "9305126262",
+    "billing_address": "life republic",
+    "billing_city": "Pune",
+    "billing_state": "Maharashtra",
+    "billing_postal_code": "411057",
+    "billing_country": "India",
+    "shipping_address": "life republic",
+    "shipping_city": "Pune",
+    "shipping_state": "Maharashtra",
+    "shipping_postal_code": "411057",
+    "shipping_country": "India",
+    "same_as_billing": true,
+    "subtotal": "1500.00",
+    "discount": "0.00",
+    "tax": "150.00",
+    "shipping_cost": "10.00",
+    "total": "1660.00",
+    "coupon_code": "",
+    "payment_method": "cod",
+    "payment_status": "pending",
+    "razorpay_order_id": "",
+    "razorpay_payment_id": "",
+    "stripe_payment_intent": "",
+    "status": "pending",
+    "notes": "",
+    "created": "2026-07-25T06:22:54.986Z",
+    "updated": "2026-07-25T06:22:55.005Z"
+  }
+}
+]
+
