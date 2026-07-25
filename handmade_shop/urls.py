@@ -8,6 +8,7 @@ from accounts.forms import LoginForm
 from accounts.views import logout_confirm
 from django.contrib.sitemaps.views import sitemap
 from core.sitemaps import PaintingSitemap, StaticViewSitemap
+from core import views as core_views
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -16,6 +17,7 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('debug/cloudinary/', core_views.debug_cloudinary, name='debug_cloudinary'),
     path('', include('core.urls')),
     # convenience shortcut: /register/ -> accounts register view
     path('register/', RedirectView.as_view(pattern_name='accounts_register', permanent=False)),

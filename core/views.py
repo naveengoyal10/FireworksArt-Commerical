@@ -7,6 +7,7 @@ from django.contrib import messages
 from blog.models import Post
 from django.db.models import F
 from django.conf import settings
+from django.http import JsonResponse
 
 
 def home(request):
@@ -51,6 +52,28 @@ def home(request):
         'meta_image': settings.DEFAULT_META_IMAGE,
         'og_type': 'website',
     })
+
+
+def debug_cloudinary(request):
+    if not (settings.DEBUG or os.getenv('CLOUDINARY_DEBUG') == 'True'):
+        return JsonResponse({'error': 'Cloudinary debug endpoint disabled.'}, status=404)
+
+    try:
+        import cloudinary
+        config = cloudinary.config()
+        data = {
+            'cloud_name': getattr(config, 'cloud_name', None),
+            'api_key_set': bool(getattr(config, 'api_key', None)),
+            'api_secret_set': bool(getattr(config, 'api_secret', None)),
+            'default_file_storage': settings.DEFAULT_FILE_STORAGE,
+            'media_url': settings.MEDIA_URL,
+            'cloudinary_storage': getattr(settings, 'CLOUDINARY_STORAGE', {}),
+            'cloudinary_url': os.getenv('CLOUDINARY_URL'),
+            'cloudinary_cloud_name': os.getenv('CLOUDINARY_CLOUD_NAME'),
+        }
+    except Exception as exc:
+        data = {'error': str(exc)}
+    return JsonResponse(data)
 
 
 def contact(request):

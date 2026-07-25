@@ -139,10 +139,15 @@ if os.getenv('VERCEL') and not os.getenv('MEDIA_ROOT'):
     MEDIA_ROOT = Path('/tmp/media')
 
 # Enable Cloudinary media storage when Cloudinary config is present.
-cloudinary_url = os.getenv('CLOUDINARY_URL')
-cloudinary_name = os.getenv('CLOUDINARY_CLOUD_NAME')
-cloudinary_api_key = os.getenv('CLOUDINARY_API_KEY')
-cloudinary_api_secret = os.getenv('CLOUDINARY_API_SECRET')
+cloudinary_url = os.getenv('CLOUDINARY_URL', '')
+cloudinary_name = os.getenv('CLOUDINARY_CLOUD_NAME', '')
+cloudinary_api_key = os.getenv('CLOUDINARY_API_KEY', '')
+cloudinary_api_secret = os.getenv('CLOUDINARY_API_SECRET', '')
+
+cloudinary_url = cloudinary_url.strip() if cloudinary_url else ''
+cloudinary_name = cloudinary_name.strip() if cloudinary_name else ''
+cloudinary_api_key = cloudinary_api_key.strip() if cloudinary_api_key else ''
+cloudinary_api_secret = cloudinary_api_secret.strip() if cloudinary_api_secret else ''
 
 if cloudinary_url or cloudinary_name or cloudinary_api_key or cloudinary_api_secret:
     import cloudinary
