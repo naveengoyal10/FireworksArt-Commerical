@@ -72,6 +72,13 @@ def debug_cloudinary(request):
             'cloudinary_storage': getattr(settings, 'CLOUDINARY_STORAGE', {}),
             'cloudinary_url': os.getenv('CLOUDINARY_URL'),
             'cloudinary_cloud_name': os.getenv('CLOUDINARY_CLOUD_NAME'),
+            'resolved_cloudinary_config': {
+                'cloud_name': getattr(config, 'cloud_name', None),
+                'secure': getattr(config, 'secure', None),
+                'cdn_subdomain': getattr(config, 'cdn_subdomain', None),
+                'secure_distribution': getattr(config, 'secure_distribution', None),
+                'private_cdn': getattr(config, 'private_cdn', None),
+            },
         }
     except Exception as exc:
         data = {'error': str(exc)}
