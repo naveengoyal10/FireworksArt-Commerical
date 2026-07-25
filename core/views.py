@@ -1,3 +1,5 @@
+import os
+
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from paintings.models import HeroSlider, Painting, Category
