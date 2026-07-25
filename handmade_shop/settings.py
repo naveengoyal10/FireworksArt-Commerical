@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -123,23 +124,47 @@ if os.getenv('VERCEL') and not os.getenv('MEDIA_ROOT'):
     MEDIA_ROOT = Path('/tmp/media')
 
 # Enable Cloudinary media storage when Cloudinary config is present.
-if os.getenv('CLOUDINARY_URL') or os.getenv('CLOUDINARY_CLOUD_NAME'):
+cloudinary_url = os.getenv('CLOUDINARY_URL')
+cloudinary_name = os.getenv('CLOUDINARY_CLOUD_NAME')
+cloudinary_api_key = os.getenv('CLOUDINARY_API_KEY')
+cloudinary_api_secret = os.getenv('CLOUDINARY_API_SECRET')
+
+if cloudinary_url or cloudinary_name or cloudinary_api_key or cloudinary_api_secret:
+    if cloudinary_url and not cloudinary_url.startswith('cloudinary://'):
+        raise ImproperlyConfigured(
+            "Invalid CLOUDINARY_URL. It must start with 'cloudinary://'"
+        )
+
     import cloudinary
+
+    if cloudinary_url:
+        cloudinary.config(cloudinary_url=cloudinary_url)
+    else:
+        if not (cloudinary_name and cloudinary_api_key and cloudinary_api_secret):
+            raise ImproperlyConfigured(
+                "Cloudinary configuration requires CLOUDINARY_URL or all of "
+                "CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET."
+            )
+        cloudinary.config(
+            cloud_name=cloudinary_name,
+            api_key=cloudinary_api_key,
+            api_secret=cloudinary_api_secret,
+        )
 
     INSTALLED_APPS += [
         'cloudinary',
         'cloudinary_storage',
     ]
     CLOUDINARY_STORAGE = {
-        'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL'),
-        'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-        'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-        'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+        'CLOUDINARY_URL': cloudinary_url,
+        'CLOUD_NAME': cloudinary_name,
+        'API_KEY': cloudinary_api_key,
+        'API_SECRET': cloudinary_api_secret,
         'PREFIX': os.getenv('CLOUDINARY_PREFIX', ''),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     if 'MEDIA_URL' not in os.environ:
-        cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME') or cloudinary.config().cloud_name
+        cloud_name = cloudinary.config().cloud_name
         if cloud_name:
             MEDIA_URL = f'https://res.cloudinary.com/{cloud_name}/'
 
