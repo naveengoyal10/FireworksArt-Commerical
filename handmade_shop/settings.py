@@ -138,7 +138,8 @@ if cloudinary_url or cloudinary_name or cloudinary_api_key or cloudinary_api_sec
     import cloudinary
 
     if cloudinary_url:
-        cloudinary.config(cloudinary_url=cloudinary_url)
+        # Importing cloudinary already parses CLOUDINARY_URL into config.
+        pass
     else:
         if not (cloudinary_name and cloudinary_api_key and cloudinary_api_secret):
             raise ImproperlyConfigured(
@@ -149,6 +150,12 @@ if cloudinary_url or cloudinary_name or cloudinary_api_key or cloudinary_api_sec
             cloud_name=cloudinary_name,
             api_key=cloudinary_api_key,
             api_secret=cloudinary_api_secret,
+        )
+
+    if not getattr(cloudinary.config(), 'cloud_name', None):
+        raise ImproperlyConfigured(
+            "Cloudinary configuration is invalid: cloud_name is missing. "
+            "Check CLOUDINARY_URL or CLOUDINARY_CLOUD_NAME/CLOUDINARY_API_KEY/CLOUDINARY_API_SECRET."
         )
 
     INSTALLED_APPS += [
