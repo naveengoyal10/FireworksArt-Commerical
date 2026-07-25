@@ -117,6 +117,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
 MEDIA_ROOT = Path(os.getenv('MEDIA_ROOT', str(BASE_DIR / 'media')))
 
+# On Vercel serverless builds, the repository file system is read-only.
+# Use /tmp/media for temporary writable storage when no persistent MEDIA_ROOT is configured.
+if os.getenv('VERCEL') and not os.getenv('MEDIA_ROOT'):
+    MEDIA_ROOT = Path('/tmp/media')
+
 # Use S3 for media files when AWS_STORAGE_BUCKET_NAME is set in environment.
 # If django-storages is unavailable, fallback to default local storage.
 if os.getenv('AWS_STORAGE_BUCKET_NAME'):
