@@ -58,11 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Optional storage backend
-INSTALLED_APPS += [
-    # only required if you configure S3 for media/static files
-    'storages',
-]
+# Optional storage backends are added conditionally below when configured
 
 ROOT_URLCONF = 'handmade_shop.urls'
 
@@ -121,18 +117,30 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
 MEDIA_ROOT = Path(os.getenv('MEDIA_ROOT', str(BASE_DIR / 'media')))
 
-# Use S3 for media files when AWS_STORAGE_BUCKET_NAME is set in environment
+# Use S3 for media files when AWS_STORAGE_BUCKET_NAME is set in environment.
+# If django-storages is unavailable, fallback to default local storage.
 if os.getenv('AWS_STORAGE_BUCKET_NAME'):
-    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', None)
-    AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN') or f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    # Only override MEDIA_URL with S3 domain if user didn't explicitly set MEDIA_URL
-    if 'MEDIA_URL' not in os.environ:
-        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+    try:
+        import storages  # noqa: F401
+    except ImportError:
+        AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+        AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', None)
+        AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN') or f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+        # If django-storages is not installed, keep default local storage and do not fail collectstatic.
+    else:
+        INSTALLED_APPS += [
+            'storages',
+        ]
+        AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+        AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', None)
+        AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN') or f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+        AWS_S3_OBJECT_PARAMETERS = {
+            'CacheControl': 'max-age=86400',
+        }
+        DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+        # Only override MEDIA_URL with S3 domain if user didn't explicitly set MEDIA_URL
+        if 'MEDIA_URL' not in os.environ:
+            MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
 # Third party service keys (set in .env)
 RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
