@@ -152,11 +152,16 @@ if cloudinary_url or cloudinary_name or cloudinary_api_key or cloudinary_api_sec
             api_secret=cloudinary_api_secret,
         )
 
-    if not getattr(cloudinary.config(), 'cloud_name', None):
+    cloudinary_config = cloudinary.config()
+    if not getattr(cloudinary_config, 'cloud_name', None):
         raise ImproperlyConfigured(
             "Cloudinary configuration is invalid: cloud_name is missing. "
             "Check CLOUDINARY_URL or CLOUDINARY_CLOUD_NAME/CLOUDINARY_API_KEY/CLOUDINARY_API_SECRET."
         )
+
+    cloudinary_name = cloudinary_name or cloudinary_config.cloud_name
+    cloudinary_api_key = cloudinary_api_key or cloudinary_config.api_key
+    cloudinary_api_secret = cloudinary_api_secret or cloudinary_config.api_secret
 
     INSTALLED_APPS += [
         'cloudinary',
@@ -171,9 +176,7 @@ if cloudinary_url or cloudinary_name or cloudinary_api_key or cloudinary_api_sec
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     if 'MEDIA_URL' not in os.environ:
-        cloud_name = cloudinary.config().cloud_name
-        if cloud_name:
-            MEDIA_URL = f'https://res.cloudinary.com/{cloud_name}/'
+        MEDIA_URL = f'https://res.cloudinary.com/{cloudinary_name}/'
 
 # Use S3 for media files when AWS_STORAGE_BUCKET_NAME is set in environment.
 # If django-storages is unavailable, fallback to default local storage.
