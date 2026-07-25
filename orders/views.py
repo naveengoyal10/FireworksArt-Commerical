@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -13,6 +13,22 @@ from paintings.models import Painting
 from cart.views import _get_cart_session, _calculate_cart_totals
 from cart.models import Coupon
 import razorpay
+from razorpay.errors import BadRequestError
+
+
+def _get_razorpay_client():
+    if not settings.RAZORPAY_KEY_ID or not settings.RAZORPAY_KEY_SECRET:
+        raise ValueError('Razorpay credentials are not configured. Please add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to your .env file.')
+    return razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+
+def _get_customer_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    if request.user.is_staff:
+        return order
+    if not request.user.is_authenticated or order.user != request.user:
+        raise Http404('Order not found.')
+    return order
 
 
 def checkout_view(request):
@@ -44,7 +60,7 @@ def checkout_view(request):
     if request.method == 'POST':
         form = CheckoutForm(request.POST)
         if form.is_valid():
-            # Create order
+            # Create order with required totals set up front
             order = Order.objects.create(
                 user=request.user if request.user.is_authenticated else None,
                 full_name=form.cleaned_data['full_name'],
@@ -57,6 +73,12 @@ def checkout_view(request):
                 billing_country=form.cleaned_data['billing_country'],
                 same_as_billing=form.cleaned_data['same_as_billing'],
                 payment_method=form.cleaned_data['payment_method'],
+                subtotal=totals['subtotal'],
+                discount=totals['discount'],
+                tax=totals['tax'],
+                shipping_cost=totals['shipping'],
+                total=totals['grand_total'],
+                coupon_code=coupon_code or '',
             )
             
             # Shipping address
@@ -73,7 +95,7 @@ def checkout_view(request):
                 order.shipping_postal_code = form.cleaned_data['shipping_postal_code']
                 order.shipping_country = form.cleaned_data['shipping_country']
             
-            # Set order totals
+            # Preserve totals after shipping info assignment
             order.subtotal = totals['subtotal']
             order.discount = totals['discount']
             order.tax = totals['tax']
@@ -119,9 +141,10 @@ def checkout_view(request):
     return render(request, 'orders/checkout.html', context)
 
 
+@login_required
 def order_confirmation(request, order_id):
     """Display order confirmation page"""
-    order = get_object_or_404(Order, pk=order_id)
+    order = _get_customer_order(request, order_id)
     
     # For COD, mark as confirmed
     if order.payment_method == 'cod' and order.payment_status == 'pending':
@@ -143,9 +166,7 @@ def order_list(request):
 
 @login_required
 def order_detail(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    if not request.user.is_staff and order.user != request.user:
-        return redirect('orders:order_list')
+    order = _get_customer_order(request, pk)
     
     status_steps = [
         {'key': 'pending', 'label': 'Pending'},
@@ -163,9 +184,7 @@ def order_detail(request, pk):
 
 @login_required
 def cancel_order(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
-    if not request.user.is_staff and order.user != request.user:
-        return redirect('orders:order_list')
+    order = _get_customer_order(request, order_id)
 
     if order.status in ['shipped', 'delivered', 'cancelled']:
         messages.warning(request, 'This order cannot be cancelled at this stage.')
@@ -182,9 +201,7 @@ def cancel_order(request, order_id):
 
 @login_required
 def track_order(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
-    if not request.user.is_staff and order.user != request.user:
-        return redirect('orders:order_list')
+    order = _get_customer_order(request, order_id)
 
     status_steps = [
         {'key': 'pending', 'label': 'Pending'},
@@ -218,25 +235,30 @@ def send_order_confirmation_email(order):
     )
 
 
+@login_required
 def razorpay_checkout(request, order_id):
     """Razorpay payment checkout page"""
-    order = get_object_or_404(Order, pk=order_id)
+    order = _get_customer_order(request, order_id)
     
     if order.payment_status == 'completed':
         return redirect('orders:order_confirmation', order_id=order.id)
     
-    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-    amount_paise = int(float(order.total) * 100)
-    
-    razorpay_order = client.order.create({
-        'amount': amount_paise,
-        'currency': 'INR',
-        'receipt': str(order.id),
-        'notes': {
-            'order_id': str(order.id),
-            'customer_email': order.email,
-        }
-    })
+    try:
+        client = _get_razorpay_client()
+        amount_paise = int(float(order.total) * 100)
+        razorpay_order = client.order.create({
+            'amount': amount_paise,
+            'currency': 'INR',
+            'receipt': str(order.id),
+            'notes': {
+                'order_id': str(order.id),
+                'customer_email': order.email,
+            }
+        })
+    except (BadRequestError, ValueError) as e:
+        return render(request, 'orders/payment_failed.html', {'error': str(e)})
+    except Exception as e:
+        return render(request, 'orders/payment_failed.html', {'error': f'Unable to initiate Razorpay payment: {e}'})
     
     order.razorpay_order_id = razorpay_order['id']
     order.save()
@@ -255,14 +277,13 @@ def razorpay_checkout(request, order_id):
 def razorpay_verify(request):
     """Verify Razorpay payment"""
     if request.method == 'POST':
+        razorpay_payment_id = request.POST.get('razorpay_payment_id')
+        razorpay_order_id = request.POST.get('razorpay_order_id')
+        razorpay_signature = request.POST.get('razorpay_signature')
+        order = None
         try:
-            razorpay_payment_id = request.POST.get('razorpay_payment_id')
-            razorpay_order_id = request.POST.get('razorpay_order_id')
-            razorpay_signature = request.POST.get('razorpay_signature')
-            
             order = Order.objects.get(razorpay_order_id=razorpay_order_id)
-            
-            client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+            client = _get_razorpay_client()
             
             # Verify signature
             client.utility.verify_payment_signature({
@@ -280,22 +301,26 @@ def razorpay_verify(request):
             send_payment_confirmation_email(order)
             
             return redirect('orders:order_confirmation', order_id=order.id)
-        except Exception as e:
-            # Payment failed
-            try:
-                order = Order.objects.get(razorpay_order_id=razorpay_order_id)
+        except Order.DoesNotExist:
+            return render(request, 'orders/payment_failed.html', {'error': 'Order not found for this Razorpay payment.'})
+        except (BadRequestError, ValueError) as e:
+            if order:
                 order.payment_status = 'failed'
                 order.save()
-            except:
-                pass
             return render(request, 'orders/payment_failed.html', {'error': str(e)})
+        except Exception as e:
+            if order:
+                order.payment_status = 'failed'
+                order.save()
+            return render(request, 'orders/payment_failed.html', {'error': f'Payment verification failed: {e}'})
     
     return redirect('/cart/')
 
 
+@login_required
 def stripe_checkout(request, order_id):
     """Stripe payment checkout page"""
-    order = get_object_or_404(Order, pk=order_id)
+    order = _get_customer_order(request, order_id)
     
     if order.payment_status == 'completed':
         return redirect('orders:order_confirmation', order_id=order.id)
@@ -330,8 +355,10 @@ def send_payment_confirmation_email(order):
     )
 
 
+@login_required
 def generate_invoice(request, order_id):
     """Generate and download PDF invoice"""
+    order = _get_customer_order(request, order_id)
     try:
         from reportlab.lib.pagesizes import letter
         from reportlab.lib.styles import getSampleStyleSheet
@@ -422,14 +449,4 @@ def generate_invoice(request, order_id):
     response['Content-Disposition'] = f'attachment; filename="{order.get_invoice_filename()}"'
     
     return response
-
-
-def order_list(request):
-    orders = Order.objects.all()
-    return render(request, 'orders/order_list.html', {'orders': orders})
-
-
-def order_detail(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    return render(request, 'orders/order_detail.html', {'order': order})
 

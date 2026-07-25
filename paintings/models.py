@@ -46,6 +46,7 @@ class Painting(models.Model):
     weight = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     featured_image = models.ImageField(upload_to='paintings/', blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+    show_in_shop = models.BooleanField(default=True, help_text='Show this painting on the shop page')
     featured = models.BooleanField(default=False)
     bestseller = models.BooleanField(default=False)
     new_arrival = models.BooleanField(default=False)

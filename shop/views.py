@@ -16,17 +16,16 @@ from django.views.decorators.csrf import csrf_exempt
 
 def product_list(request):
     query = request.GET.get('q', '')
-    layout = request.GET.get('layout', 'grid')
+    layout = 'grid'
     page = request.GET.get('page', 1)
     category_id = request.GET.get('category', '')
     price_min = request.GET.get('price_min', '')
     price_max = request.GET.get('price_max', '')
-    medium = request.GET.get('medium', '')
-    size = request.GET.get('size', '')
+
     availability = request.GET.get('availability', '')
     sort = request.GET.get('sort', 'latest')
 
-    products = Painting.objects.filter(status='published')
+    products = Painting.objects.filter(status='published', show_in_shop=True)
 
     if query:
         products = products.filter(
@@ -38,12 +37,6 @@ def product_list(request):
 
     if category_id:
         products = products.filter(categories__id=category_id).distinct()
-
-    if medium:
-        products = products.filter(medium__iexact=medium)
-
-    if size:
-        products = products.filter(size__iexact=size)
 
     if availability == 'available':
         products = products.filter(stock__gt=0)
@@ -70,8 +63,6 @@ def product_list(request):
         products = products.order_by('-created')
 
     category_options = Category.objects.order_by('name')
-    medium_options = Painting.objects.filter(status='published').values_list('medium', flat=True).distinct().exclude(medium='').order_by('medium')
-    size_options = Painting.objects.filter(status='published').values_list('size', flat=True).distinct().exclude(size='').order_by('size')
 
     paginator = Paginator(products, 12)
     try:
@@ -89,10 +80,6 @@ def product_list(request):
         'page_obj': products_page,
         'category_options': category_options,
         'selected_category': category_id,
-        'medium_options': [m for m in medium_options if m],
-        'selected_medium': medium,
-        'size_options': [s for s in size_options if s],
-        'selected_size': size,
         'selected_availability': availability,
         'selected_sort': sort,
         'price_min': price_min,
@@ -210,7 +197,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth_login(request, user)
+            auth_login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])
             return redirect('product_list')
     else:
         form = UserCreationForm()

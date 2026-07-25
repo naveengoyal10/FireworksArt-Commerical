@@ -15,9 +15,9 @@ class PaintingImageInline(admin.TabularInline):
 
 @admin.register(Painting)
 class PaintingAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist_name', 'price', 'stock', 'status', 'featured')
+    list_display = ('title', 'artist_name', 'price', 'stock', 'status', 'show_in_shop', 'featured')
     prepopulated_fields = {'slug': ('title',)}
-    list_filter = ('status', 'featured', 'bestseller', 'new_arrival', 'categories')
+    list_filter = ('status', 'show_in_shop', 'featured', 'bestseller', 'new_arrival', 'categories')
     search_fields = ('title', 'artist_name', 'sku')
     inlines = [PaintingImageInline]
 

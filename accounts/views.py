@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from .forms import ProfileForm, UserForm, AddressForm
 from .models import Profile, Address
 
@@ -16,7 +17,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth_login(request, user)
+            auth_login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])
             return redirect('home')
     else:
         form = RegisterForm()

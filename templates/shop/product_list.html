@@ -24,7 +24,6 @@
       </div>
       <div class="col-lg-8">
         <form method="get" class="row g-2 align-items-end" id="catalog">
-          <input type="hidden" name="layout" value="{{ layout }}">
           <div class="col-md-2">
             <label class="form-label" for="category">Category</label>
             <select class="form-select" id="category" name="category">
@@ -34,25 +33,7 @@
               {% endfor %}
             </select>
           </div>
-          <div class="col-md-2">
-            <label class="form-label" for="medium">Medium</label>
-            <select class="form-select" id="medium" name="medium">
-              <option value="">All</option>
-              {% for m in medium_options %}
-                <option value="{{ m }}" {% if m == selected_medium %}selected{% endif %}>{{ m }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="col-md-2">
-            <label class="form-label" for="size">Size</label>
-            <select class="form-select" id="size" name="size">
-              <option value="">All</option>
-              {% for s in size_options %}
-                <option value="{{ s }}" {% if s == selected_size %}selected{% endif %}>{{ s }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label class="form-label" for="availability">Availability</label>
             <select class="form-select" id="availability" name="availability">
               <option value="">Any</option>
@@ -60,7 +41,7 @@
               <option value="unavailable" {% if selected_availability == 'unavailable' %}selected{% endif %}>Unavailable</option>
             </select>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <label class="form-label" for="sort">Sort by</label>
             <select class="form-select" id="sort" name="sort">
               <option value="latest" {% if selected_sort == 'latest' %}selected{% endif %}>Latest</option>
@@ -78,7 +59,7 @@
           </div>
           <div class="col-12 d-flex gap-2 pt-2">
             <button type="submit" class="btn btn-primary">Apply filters</button>
-            <a href="?layout={{ layout }}" class="btn btn-outline-secondary">Clear filters</a>
+            <a href="?q={{ query|urlencode }}&category={{ selected_category }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}" class="btn btn-outline-secondary">Clear filters</a>
           </div>
         </form>
       </div>
@@ -87,16 +68,12 @@
 
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
     <div class="text-muted">{{ paginator.count }} painting{{ paginator.count|pluralize }} found</div>
-    <div class="btn-group" role="group" aria-label="Layout toggle">
-      <a href="?q={{ query|urlencode }}&layout=grid&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}" class="btn btn-sm btn-outline-primary {% if layout == 'grid' %}active{% endif %}">Grid</a>
-      <a href="?q={{ query|urlencode }}&layout=list&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}" class="btn btn-sm btn-outline-primary {% if layout == 'list' %}active{% endif %}">List</a>
-    </div>
   </div>
 
   {% if products %}
-    <div class="product-list row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 {% if layout == 'list' %}list-view{% else %}grid-view{% endif %}">
+    <div class="product-list grid-view">
       {% for p in products %}
-        <div class="col">
+        <div class="product">
           <article class="shop-product-card card h-100 border-0 shadow-sm">
             {% if p.featured_image %}
               <img src="{{ p.featured_image.url }}" class="card-img-top" alt="{{ p.title }}">
@@ -111,7 +88,6 @@
                 {% endif %}
               </div>
               <p class="text-muted small mb-2">by {{ p.artist_name|default:'Unknown Artist' }}</p>
-              <p class="text-muted mb-3">{{ p.medium }} · {{ p.size }}</p>
               <p class="card-text mb-3">{{ p.description|truncatechars:110 }}</p>
               <div class="mt-auto d-flex justify-content-between align-items-center gap-2">
                 <div class="fw-bold text-dark">₹{{ p.discount_price|default:p.price }}</div>
@@ -126,7 +102,7 @@
     <nav aria-label="Shop pagination" class="mt-4">
       <ul class="pagination justify-content-center">
         {% if page_obj.has_previous %}
-          <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&layout={{ layout }}&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ page_obj.previous_page_number }}">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&category={{ selected_category }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ page_obj.previous_page_number }}">Previous</a></li>
         {% else %}
           <li class="page-item disabled"><span class="page-link">Previous</span></li>
         {% endif %}
@@ -135,12 +111,12 @@
           {% if num == page_obj.number %}
             <li class="page-item active"><span class="page-link">{{ num }}</span></li>
           {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&layout={{ layout }}&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ num }}">{{ num }}</a></li>
+            <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&category={{ selected_category }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ num }}">{{ num }}</a></li>
           {% endif %}
         {% endfor %}
 
         {% if page_obj.has_next %}
-          <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&layout={{ layout }}&category={{ selected_category }}&medium={{ selected_medium|urlencode }}&size={{ selected_size|urlencode }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ page_obj.next_page_number }}">Next</a></li>
+          <li class="page-item"><a class="page-link" href="?q={{ query|urlencode }}&category={{ selected_category }}&availability={{ selected_availability }}&sort={{ selected_sort }}&price_min={{ price_min }}&price_max={{ price_max }}&page={{ page_obj.next_page_number }}">Next</a></li>
         {% else %}
           <li class="page-item disabled"><span class="page-link">Next</span></li>
         {% endif %}
