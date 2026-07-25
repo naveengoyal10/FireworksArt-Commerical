@@ -135,8 +135,13 @@ if os.getenv('CLOUDINARY_URL') or os.getenv('CLOUDINARY_CLOUD_NAME'):
         'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
         'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
         'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+        'PREFIX': os.getenv('CLOUDINARY_PREFIX', ''),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    if 'MEDIA_URL' not in os.environ:
+        cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME') or cloudinary.config().cloud_name
+        if cloud_name:
+            MEDIA_URL = f'https://res.cloudinary.com/{cloud_name}/'
 
 # Use S3 for media files when AWS_STORAGE_BUCKET_NAME is set in environment.
 # If django-storages is unavailable, fallback to default local storage.
