@@ -104,9 +104,9 @@ def contact(request):
         form = ContactForm()
 
     business_info = {
-        'address': '123 Art Lane, Creative City, Country',
-        'phone': '+1 555 123 456',
-        'email': 'support@fireworkart.com',
+        'address': 'F-1908 Life republic City, Pune',
+        'phone': '+91 9703203355',
+        'email': 'naveengoyal10@gmail.com',
         'hours': 'Mon - Fri: 9am - 6pm',
     }
     social_links = [
