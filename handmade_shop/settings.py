@@ -124,6 +124,8 @@ if os.getenv('VERCEL') and not os.getenv('MEDIA_ROOT'):
 
 # Enable Cloudinary media storage when Cloudinary config is present.
 if os.getenv('CLOUDINARY_URL') or os.getenv('CLOUDINARY_CLOUD_NAME'):
+    import cloudinary
+
     INSTALLED_APPS += [
         'cloudinary',
         'cloudinary_storage',
@@ -135,10 +137,6 @@ if os.getenv('CLOUDINARY_URL') or os.getenv('CLOUDINARY_CLOUD_NAME'):
         'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    if 'MEDIA_URL' not in os.environ:
-        cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
-        if cloud_name:
-            MEDIA_URL = f'https://res.cloudinary.com/{cloud_name}/'
 
 # Use S3 for media files when AWS_STORAGE_BUCKET_NAME is set in environment.
 # If django-storages is unavailable, fallback to default local storage.
