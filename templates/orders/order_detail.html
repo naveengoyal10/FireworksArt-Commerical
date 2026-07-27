@@ -17,9 +17,13 @@
     </div>
     <div class="mt-3 d-flex flex-wrap gap-2 align-items-center">
       <span class="badge bg-primary">{{ order.get_status_display }}</span>
-      <span class="badge bg-{{ 'success' if order.payment_status == 'completed' else 'warning' if order.payment_status == 'pending' else 'danger' }}">
-        {{ order.get_payment_status_display }}
-      </span>
+      {% if order.payment_status == 'completed' %}
+        <span class="badge bg-success">{{ order.get_payment_status_display }}</span>
+      {% elif order.payment_status == 'pending' %}
+        <span class="badge bg-warning">{{ order.get_payment_status_display }}</span>
+      {% else %}
+        <span class="badge bg-danger">{{ order.get_payment_status_display }}</span>
+      {% endif %}
       <span class="badge bg-light text-dark">{{ order.get_payment_method_display }}</span>
     </div>
   </div>
