@@ -571,3 +571,10 @@ body { font-family: 'Poppins', Arial, sans-serif; color: #111; }
   border-radius: 999px;
   padding-inline: 1rem;
 }
+  @media (max-width: 768px) {
+    .card-img-top,
+    .product-list.grid-view .shop-product-card img,
+    .featured-card .card-img-top {
+      height: auto;
+    }
+  }
