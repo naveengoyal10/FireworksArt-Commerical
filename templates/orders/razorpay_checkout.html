@@ -11,7 +11,7 @@
           <h2 class="mb-1">Amount to Pay: <span class="text-primary">₹{{ order.total|floatformat:2 }}</span></h2>
           <p class="text-muted mb-4">Click the button below to proceed with payment</p>
 
-          <form method="POST" action="{% url 'razorpay_verify' %}" id="razorpayForm">
+          <form method="POST" action="{% url 'orders:razorpay_verify' %}" id="razorpayForm">
             {% csrf_token %}
             <button type="button" id="razorpayBtn" class="btn btn-primary btn-lg">
               <i class="fas fa-lock"></i> Pay with Razorpay

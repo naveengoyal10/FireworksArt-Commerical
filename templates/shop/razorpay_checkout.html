@@ -2,7 +2,7 @@
 {% block content %}
 <h2>Pay for Order {{ order.id }}</h2>
 <p>Amount: ₹{{ amount|floatformat:-2 }}</p>
-<form id="payment-form" method="post" action="{% url 'razorpay_verify' %}">
+<form id="payment-form" method="post" action="{% url 'shop:razorpay_verify' %}">
   {% csrf_token %}
   <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
   <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
