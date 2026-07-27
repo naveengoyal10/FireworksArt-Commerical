@@ -575,6 +575,32 @@ body { font-family: 'Poppins', Arial, sans-serif; color: #111; }
   border-radius: 999px;
   padding-inline: 1rem;
 }
+
+.whatsapp-chat-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.whatsapp-chat-btn i {
+  font-size: 1.1rem;
+}
+
+.whatsapp-chat-btn:hover {
+  background-color: #1ebe57;
+}
+
   @media (max-width: 768px) {
     .card-img-top,
     .product-list.grid-view .shop-product-card img,
