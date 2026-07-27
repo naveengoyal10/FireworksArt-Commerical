@@ -26,9 +26,13 @@ header { background: #eee; padding: 1rem; }
 header h1 { display: inline-block; margin: 0; }
 nav { display: inline-block; margin-left: 1rem; }
 .products { display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; }
-.product { border: 1px solid #ddd; padding: 0.5rem; width: 220px; }
+.product { border: 1px solid #ddd; padding: 0.5rem; width: auto; max-width: 100%; }
 .product img { max-width: 100%; height: auto; }
 .card-img-top { height: 180px; object-fit: cover; }
+
+@media (max-width: 768px) {
+  .product { width: 100%; }
+}
 
 /* Hero carousel image sizing: keep aspect and cover the area */
 .home-hero .carousel-item img {
