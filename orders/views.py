@@ -22,9 +22,11 @@ def _get_razorpay_client():
     return razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
 
 
-def _get_customer_order(request, order_id):
+def _get_customer_order(request, order_id, allow_guest=False):
     order = get_object_or_404(Order, pk=order_id)
     if request.user.is_staff:
+        return order
+    if order.user is None and allow_guest:
         return order
     if not request.user.is_authenticated or order.user != request.user:
         raise Http404('Order not found.')
@@ -141,10 +143,9 @@ def checkout_view(request):
     return render(request, 'orders/checkout.html', context)
 
 
-@login_required
 def order_confirmation(request, order_id):
     """Display order confirmation page"""
-    order = _get_customer_order(request, order_id)
+    order = _get_customer_order(request, order_id, allow_guest=True)
     
     # For COD, mark as confirmed
     if order.payment_method == 'cod' and order.payment_status == 'pending':
