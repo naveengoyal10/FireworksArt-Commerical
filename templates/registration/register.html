@@ -59,7 +59,7 @@
 
         <div class="mb-3 form-check">
           {{ form.terms }}
-          <label class="form-check-label">I agree to the <a href="/terms/">Terms &amp; Conditions</a></label>
+          <label class="form-check-label">I agree to the <a href="{% url 'terms' %}">Terms &amp; Conditions</a></label>
           {{ form.terms.errors }}
         </div>
 

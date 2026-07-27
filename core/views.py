@@ -85,6 +85,15 @@ def debug_cloudinary(request):
     return JsonResponse(data)
 
 
+def terms(request):
+    return render(request, 'core/terms.html', {
+        'meta_title': 'Terms & Conditions - Firework Art',
+        'meta_description': 'Review the terms and conditions for using Firework Art and purchasing paintings online.',
+        'meta_image': settings.DEFAULT_META_IMAGE,
+        'og_type': 'website',
+    })
+
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
