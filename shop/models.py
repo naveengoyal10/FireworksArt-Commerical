@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -34,6 +35,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name='shop_orders')
     full_name = models.CharField(max_length=200)
     email = models.EmailField()
     address = models.TextField()

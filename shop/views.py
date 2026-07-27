@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import CheckoutForm
-from .models import Order, OrderItem
+from .models import Order, OrderItem, Product
 from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login
@@ -97,6 +98,15 @@ def _get_cart(request):
     return request.session.setdefault('cart', {})
 
 
+def _get_customer_order(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    if request.user.is_staff:
+        return order
+    if not request.user.is_authenticated or order.user != request.user:
+        raise Http404('Order not found.')
+    return order
+
+
 def add_to_cart(request, product_id):
     cart = _get_cart(request)
     cart[str(product_id)] = cart.get(str(product_id), 0) + 1
@@ -137,6 +147,7 @@ def cart_view(request):
     return render(request, 'shop/cart.html', {'items': items, 'total': total})
 
 
+@login_required
 def checkout(request):
     cart = _get_cart(request)
     if not cart:
@@ -168,6 +179,7 @@ def checkout(request):
                 return redirect('product_list')
 
             order = Order.objects.create(
+                user=request.user,
                 full_name=form.cleaned_data['full_name'],
                 email=form.cleaned_data['email'],
                 address=form.cleaned_data['address'],
@@ -187,8 +199,9 @@ def checkout(request):
     return render(request, 'shop/checkout.html', {'form': form, 'items': valid_items})
 
 
+@login_required
 def order_success(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
+    order = _get_customer_order(request, order_id)
     return render(request, 'shop/order_success.html', {'order': order})
 
 
@@ -204,8 +217,9 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
+@login_required
 def razorpay_checkout(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
+    order = _get_customer_order(request, order_id)
     if order.paid:
         return redirect('order_success', order_id=order.id)
     client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
@@ -219,6 +233,7 @@ def razorpay_checkout(request, order_id):
     })
 
 
+@login_required
 @csrf_exempt
 def razorpay_verify(request):
     if request.method == 'POST':
